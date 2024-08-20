@@ -3,6 +3,16 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "description": "DASC NEXUS Web is a administrative dashboard for DASC to manage the information which is consulted in the DASC NEXUS App.",
+  "author": {
+    "name": "Habanero Softworks"
+  },
+  "license": "MIT",
+  "keywords": [
+    "DASC",
+    "Dashboard",
+    "Web"
+  ],
   "scripts": {
     "dev": "vite --mode development",
     "build": "tsc -b && vite build --mode production",
