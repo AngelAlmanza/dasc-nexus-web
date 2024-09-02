@@ -4,3 +4,6 @@ export * from "./card";
 export * from "./form";
 export * from "./input";
 export * from "./label";
+export * from "./resizable";
+export * from "./separator";
+export * from "./tooltip";

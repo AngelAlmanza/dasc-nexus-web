@@ -1,4 +1,11 @@
+import { DashboardLayout } from "@/core/layouts";
+
 const Dashboard = () => {
-  return <div>Dashboard</div>;
+  return (
+    <DashboardLayout>
+      <h1>Dashboard</h1>
+    </DashboardLayout>
+  );
 };
+
 export default Dashboard;
