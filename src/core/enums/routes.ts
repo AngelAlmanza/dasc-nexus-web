@@ -5,4 +5,7 @@ export enum PublicRoutes {
 
 export enum PrivateRoutes {
   DASHBOARD = "/dashboard",
+  CLASSROOM = "/classroom",
+  CLASSROOM_DETAIL = "/classroom/detail",
+  CLASSROOM_CREATE = "/classroom/create",
 }

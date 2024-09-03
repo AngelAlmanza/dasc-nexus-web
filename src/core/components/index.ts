@@ -3,3 +3,4 @@ export * from "./Loading";
 export * from "./Nav";
 export * from "./NotFound";
 export * from "./RoutesWithNotFound";
+export * from "./ModuleHeaderComponent";

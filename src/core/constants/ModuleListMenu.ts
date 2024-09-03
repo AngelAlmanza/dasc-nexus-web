@@ -9,13 +9,14 @@ import {
   ScrollText,
   Users,
 } from "lucide-react";
+import { PrivateRoutes } from "@/core/enums";
 
 export const ModuleListMenu: IAsideLinks[] = [
   {
     title: "Dashboard",
     icon: LayoutDashboard,
     variant: "default",
-    to: "/dashboard",
+    to: PrivateRoutes.DASHBOARD,
   },
   {
     title: "Carreras",
@@ -33,7 +34,7 @@ export const ModuleListMenu: IAsideLinks[] = [
     title: "Salones",
     icon: School,
     variant: "default",
-    to: "/classrooms",
+    to: PrivateRoutes.CLASSROOM,
   },
   {
     title: "Alumnos",
