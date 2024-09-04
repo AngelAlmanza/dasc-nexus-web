@@ -6,7 +6,7 @@ export const BreadcrumbModule = () => {
   return (
     <BreadcrumbItem>
       <BreadcrumbLink asChild>
-        <Link to={PrivateRoutes.CLASSROOM}>Salones</Link>
+        <Link to={PrivateRoutes.STUDENT}>Alumnos</Link>
       </BreadcrumbLink>
     </BreadcrumbItem>
   );
