@@ -1,12 +1,4 @@
 import { ModuleHeaderComponent } from "@/core/components";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/core/components/ui";
 import { PrivateRoutes } from "@/core/enums";
 import { DashboardLayout } from "@/core/layouts";
 import {
@@ -16,12 +8,12 @@ import {
 import { useClassroom } from "@/modules/classrooms/hooks";
 import { getColumnLabel } from "@/modules/classrooms/utils";
 import {
+  DataTableContent,
   DataTableHeader,
   DataTablePagination,
 } from "@/modules/shared/components";
 import { useDataTable, useModuleActions } from "@/modules/shared/hooks";
 import {
-  flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
@@ -82,56 +74,10 @@ const Classroom = () => {
         getColumnLabel={getColumnLabel}
         handleNavigation={handleNavigation}
       />
-      <div className="rounded-md border">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext(),
-                          )}
-                    </TableHead>
-                  );
-                })}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext(),
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={ModuleTableColumns.length}
-                  className="h-24 text-center"
-                >
-                  Sin resultados.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </div>
+      <DataTableContent
+        table={table}
+        columnsLength={ModuleTableColumns.length}
+      />
       <DataTablePagination table={table} />
     </DashboardLayout>
   );
