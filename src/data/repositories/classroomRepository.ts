@@ -1,23 +1,33 @@
 import { ClassroomDto } from "@/data/dto";
+import { ClassroomFactory } from "@/data/factories";
 import { IRepository } from "@/data/interfaces";
 import { Classroom } from "@/data/models";
 
+const classroomFactory = new ClassroomFactory();
 export class ClassroomRepository
   implements IRepository<Classroom, ClassroomDto>
 {
   async getAll(): Promise<Classroom[]> {
-    throw new Error("Method not implemented.");
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(Array.from({ length: 100 }, () => classroomFactory.fake()));
+      }, 1000);
+    });
   }
 
   async getById(id: number): Promise<Classroom> {
-    throw new Error("Method not implemented.");
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(classroomFactory.fake());
+      }, 1000);
+    });
   }
 
   async create(data: ClassroomDto): Promise<Classroom> {
-    throw new Error("Method not implemented.");
+    throw new Error("Method not implemented");
   }
 
-  async update(data: ClassroomDto): Promise<Classroom> {
+  async update(id: number, data: ClassroomDto): Promise<Classroom> {
     throw new Error("Method not implemented.");
   }
 
