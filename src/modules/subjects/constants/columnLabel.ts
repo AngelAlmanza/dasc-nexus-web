@@ -1,4 +1,4 @@
-import { ColumnLabel } from "../types";
+import { ColumnLabel } from "@/modules/subjects/types";
 
 export const COLUMN_LABELS: ColumnLabel = {
   id: "ID",
