@@ -1,4 +1,9 @@
-import { AuthSlice, ClassroomSlice, UISlice } from "@/core/store/slices";
+import {
+  AuthSlice,
+  ClassroomSlice,
+  MajorSlice,
+  UISlice,
+} from "@/core/store/slices";
 import { configureStore } from "@reduxjs/toolkit";
 
 export const store = configureStore({
@@ -6,5 +11,6 @@ export const store = configureStore({
     auth: AuthSlice.reducer,
     ui: UISlice.reducer,
     classroom: ClassroomSlice.reducer,
+    major: MajorSlice.reducer,
   },
 });

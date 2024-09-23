@@ -1,14 +1,24 @@
 import { CareerDto } from "@/data/dto";
 import { IRepository } from "@/data/interfaces";
 import { Career } from "@/data/models";
+import { MajorFactory } from "../factories";
 
+const careerFactory = new MajorFactory();
 export class CareerRepository implements IRepository<Career, CareerDto> {
   async getAll(): Promise<Career[]> {
-    throw new Error("Method not implemented.");
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(Array.from({ length: 100 }, () => careerFactory.fake()));
+      }, 1000);
+    });
   }
 
   async getById(id: number): Promise<Career> {
-    throw new Error("Method not implemented.");
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(careerFactory.fake());
+      }, 1000);
+    });
   }
 
   async create(data: CareerDto): Promise<Career> {
