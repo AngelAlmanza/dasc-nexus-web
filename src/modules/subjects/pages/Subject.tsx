@@ -1,20 +1,61 @@
 import { ModuleHeaderComponent } from "@/core/components";
-import { Button } from "@/core/components/ui";
 import { PrivateRoutes } from "@/core/enums";
 import { DashboardLayout } from "@/core/layouts";
-import { BreadcrumbModule } from "@/modules/subjects/components";
-import { useNavigate } from "react-router-dom";
+import {
+  DataTableContent,
+  DataTableHeader,
+  DataTablePagination,
+} from "@/modules/shared/components";
+import { useDataTable, useModuleActions } from "@/modules/shared/hooks";
+import {
+  BreadcrumbModule,
+  ModuleTableColumns,
+} from "@/modules/subjects/components";
+import { useSubjects } from "@/modules/subjects/hooks";
+import { getColumnLabel } from "@/modules/subjects/utils";
+import {
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
 
 const Subject = () => {
-  const navigate = useNavigate();
+  const { subjects } = useSubjects();
+  const { handleNavigation } = useModuleActions(
+    PrivateRoutes.SUBJECT_CREATE,
+    PrivateRoutes.SUBJECT_DETAIL,
+  );
+  const {
+    sorting,
+    columnFilters,
+    columnVisibility,
+    rowSelection,
+    setSorting,
+    setColumnFilters,
+    setColumnVisibility,
+    setRowSelection,
+  } = useDataTable();
 
-  const handleGoToDetails = (id?: number) => {
-    if (id) {
-      navigate(`${PrivateRoutes.SUBJECT_DETAIL}/${id}`);
-    } else {
-      navigate(PrivateRoutes.SUBJECT_CREATE);
-    }
-  };
+  const table = useReactTable({
+    data: subjects,
+    columns: ModuleTableColumns,
+    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
+    state: {
+      sorting,
+      columnFilters,
+      columnVisibility,
+      rowSelection,
+    },
+  });
 
   return (
     <DashboardLayout
@@ -25,9 +66,19 @@ const Subject = () => {
         />
       }
     >
-      <p>Materias</p>
-      <Button onClick={() => handleGoToDetails(23)}>Go to details</Button>
-      <Button onClick={() => handleGoToDetails()}>Go to create</Button>
+      <DataTableHeader
+        table={table}
+        searchInputColumnName="name"
+        searchInputColumnPlaceholder="Buscar por nombre"
+        createButtonLabel="Crear materia"
+        getColumnLabel={getColumnLabel}
+        handleNavigation={handleNavigation}
+      />
+      <DataTableContent
+        table={table}
+        columnsLength={ModuleTableColumns.length}
+      />
+      <DataTablePagination table={table} />
     </DashboardLayout>
   );
 };
