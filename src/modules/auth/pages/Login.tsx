@@ -16,11 +16,11 @@ import {
   Input,
 } from "@/core/components/ui";
 import { PrivateRoutes } from "@/core/enums";
-import { useAppDispatch } from "@/core/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/core/store/hooks";
 import { setIsAuthenticated } from "@/core/store/slices";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { z } from "zod";
 
 const formSchema = z.object({
@@ -31,6 +31,7 @@ const formSchema = z.object({
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { isAuthenticated } = useAppSelector((state) => state.auth);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -46,6 +47,10 @@ const Login = () => {
       navigate(PrivateRoutes.DASHBOARD);
     }, 2000);
   };
+
+  if (isAuthenticated) {
+    return <Navigate to={PrivateRoutes.DASHBOARD} />;
+  }
 
   return (
     <main className="w-screen h-screen flex items-center">
