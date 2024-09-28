@@ -17,43 +17,20 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/core/components/ui";
-import { PrivateRoutes } from "@/core/enums";
 import { DashboardLayout } from "@/core/layouts";
 import { cn } from "@/core/lib";
 import { BreadcrumbForm } from "@/modules/majors/components";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useMajorDetails } from "@/modules/majors/hooks";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
-import { z } from "zod";
-
-const formSchema = z.object({
-  career: z.string().min(6, "La carrera debe tener al menos 6 carácteres"),
-  created_at: z.date(),
-});
+import { useParams } from "react-router-dom";
 
 const MajorDetails = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      career: "",
-      created_at: new Date(),
-    },
-  });
+  const { form, onCancel, onSubmit } = useMajorDetails();
 
   const title = id ? `Informacion de la Carrera ${id}` : "Crear Carrera";
   const formType = id ? "update" : "create";
-
-  const onSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log(data);
-  };
-
-  const onCancel = () => {
-    navigate(PrivateRoutes.MAJOR);
-  };
 
   return (
     <DashboardLayout
