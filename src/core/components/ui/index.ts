@@ -13,4 +13,5 @@ export * from "./resizable";
 export * from "./select";
 export * from "./separator";
 export * from "./table";
+export * from "./textarea";
 export * from "./tooltip";
