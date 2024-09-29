@@ -1,10 +1,34 @@
 import { ModuleHeaderComponent } from "@/core/components";
+import {
+  Button,
+  Calendar,
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  Input,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/core/components/ui";
 import { DashboardLayout } from "@/core/layouts";
+import { cn } from "@/core/lib";
 import { BreadcrumbForm } from "@/modules/teachers/components";
+import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
 import { useParams } from "react-router-dom";
+import { useTeacherDetails } from "../hooks";
 
 const TeacherDetails = () => {
   const { id } = useParams();
+  const { form, onCancel, onSubmit } = useTeacherDetails();
+
   const title = id ? `Informacion del Maestro ${id}` : "Crear Maestro";
   const formType = id ? "update" : "create";
 
@@ -22,7 +46,163 @@ const TeacherDetails = () => {
         />
       }
     >
-      <p>Información del Maestro</p>
+      <Form {...form}>
+        <form
+          className="w-full"
+          onSubmit={form.handleSubmit(onSubmit)}
+        >
+          <Card>
+            <CardHeader>
+              <h2 className="text-xl font-semibold">Información del Maestro</h2>
+            </CardHeader>
+            <CardContent className="grid grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Nombre</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        placeholder="Nombre"
+                        className="hover:bg-accent hover:text-accent-foreground"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="lastname"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Apellido</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        placeholder="Apellido"
+                        className="hover:bg-accent hover:text-accent-foreground"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="birthday"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Fecha de Nacimiento</FormLabel>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          className={cn(
+                            "w-full pl-3 text-left font-normal",
+                            !field.value && "text-muted-foreground",
+                          )}
+                        >
+                          {field.value ? (
+                            format(field.value, "PPP")
+                          ) : (
+                            <span>Pick a date</span>
+                          )}
+                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent
+                        className="w-auto p-0"
+                        align="start"
+                      >
+                        <Calendar
+                          mode="single"
+                          selected={field.value}
+                          onSelect={field.onChange}
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="address"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Dirección</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        placeholder="Dirección"
+                        className="hover:bg-accent hover:text-accent-foreground"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="phone"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Teléfono</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        placeholder="Teléfono"
+                        className="hover:bg-accent hover:text-accent-foreground"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="email"
+                        placeholder="Email"
+                        className="hover:bg-accent hover:text-accent-foreground"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </CardContent>
+            <CardFooter className="flex justify-end items-center gap-4">
+              <Button
+                className="w-1/4 bg-red-600 hover:bg-red-700"
+                onClick={onCancel}
+              >
+                Cancelar
+              </Button>
+              <Button
+                className="w-1/4"
+                type="submit"
+              >
+                Guardar
+              </Button>
+            </CardFooter>
+          </Card>
+        </form>
+      </Form>
     </DashboardLayout>
   );
 };
