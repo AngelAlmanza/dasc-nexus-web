@@ -1,8 +1,14 @@
 import { ModuleHeaderComponent } from "@/core/components";
 import { DashboardLayout } from "@/core/layouts";
-import { BreadcrumbModule } from "@/modules/dashboard/components";
+import {
+  BreadcrumbModule,
+  DashboardCard,
+} from "@/modules/dashboard/components";
+import { useDashboard } from "@/modules/dashboard/hooks";
 
 const Dashboard = () => {
+  const { dashboardInformation } = useDashboard();
+
   return (
     <DashboardLayout
       header={
@@ -12,7 +18,16 @@ const Dashboard = () => {
         />
       }
     >
-      <h1>Dashboard</h1>
+      <section className="grid grid-cols-3 gap-4">
+        {dashboardInformation.map((info, index) => (
+          <DashboardCard
+            key={index}
+            title={info.title}
+            content={info.content}
+            icon={info.icon}
+          />
+        ))}
+      </section>
     </DashboardLayout>
   );
 };
