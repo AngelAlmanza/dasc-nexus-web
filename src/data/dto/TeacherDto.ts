@@ -1,8 +1,8 @@
 export interface TeacherDto {
   name: string;
   lastname: string;
-  birthdate: Date;
+  birthday: string;
   address: string;
-  telephone: string;
+  phone: string;
   email: string;
 }

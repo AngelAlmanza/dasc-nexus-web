@@ -20,17 +20,13 @@ import {
 import { DashboardLayout } from "@/core/layouts";
 import { cn } from "@/core/lib";
 import { BreadcrumbForm } from "@/modules/teachers/components";
+import { useTeacherDetails } from "@/modules/teachers/hooks";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
-import { useParams } from "react-router-dom";
-import { useTeacherDetails } from "../hooks";
 
 const TeacherDetails = () => {
-  const { id } = useParams();
-  const { form, onCancel, onSubmit } = useTeacherDetails();
-
-  const title = id ? `Informacion del Maestro ${id}` : "Crear Maestro";
-  const formType = id ? "update" : "create";
+  const { id, title, formType, isLoading, form, onCancel, onSubmit } =
+    useTeacherDetails();
 
   return (
     <DashboardLayout
@@ -190,12 +186,14 @@ const TeacherDetails = () => {
               <Button
                 className="w-1/4 bg-red-600 hover:bg-red-700"
                 onClick={onCancel}
+                disabled={isLoading}
               >
                 Cancelar
               </Button>
               <Button
                 className="w-1/4"
                 type="submit"
+                disabled={isLoading}
               >
                 Guardar
               </Button>

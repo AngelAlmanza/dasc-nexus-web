@@ -7,7 +7,7 @@ export const COLUMN_LABELS: ColumnLabel = {
   address: "Dirección",
   phone: "Teléfono",
   email: "Correo",
-  birthdate: "Fecha de nacimiento",
+  birthday: "Fecha de nacimiento",
   createdAt: "Creado",
   updatedAt: "Actualizado",
 };

@@ -1,35 +1,41 @@
+import { ApiAxiosInstance } from "@/core/lib/axios";
 import { TeacherDto } from "@/data/dto";
-import { TeacherFactory } from "@/data/factories";
-import { IRepository } from "@/data/interfaces";
+import { IRepository, IResponse } from "@/data/interfaces";
 import { Teacher } from "@/data/models";
 
-const teacherFactory = new TeacherFactory();
+const api = ApiAxiosInstance.getInstance();
+const apiTeacher = "/teachers";
+
 export class TeacherRepository implements IRepository<Teacher, TeacherDto> {
   async getAll(): Promise<Teacher[]> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(Array.from({ length: 100 }, () => teacherFactory.fake()));
-      }, 1000);
-    });
+    const response = await api.get<IResponse<Teacher[]>>(apiTeacher);
+    return response.data.data;
   }
 
   async getById(id: number): Promise<Teacher> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(teacherFactory.fake());
-      }, 1000);
-    });
+    const response = await api.get<IResponse<Teacher>>(`${apiTeacher}/${id}`);
+    return response.data.data;
   }
 
   async create(data: TeacherDto): Promise<Teacher> {
-    throw new Error("Method not implemented.");
+    const response = await api.post<IResponse<Teacher>>(apiTeacher, data);
+    return response.data.data;
   }
 
-  async update(data: TeacherDto): Promise<Teacher> {
-    throw new Error("Method not implemented.");
+  async update(id: number, data: TeacherDto): Promise<Teacher> {
+    const response = await api.put<IResponse<Teacher>>(
+      `${apiTeacher}/${id}`,
+      data,
+    );
+    return response.data.data;
   }
 
   async delete(id: number): Promise<boolean> {
-    throw new Error("Method not implemented.");
+    const response = await api.delete(`${apiTeacher}/${id}`);
+    if (response.status === 204) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

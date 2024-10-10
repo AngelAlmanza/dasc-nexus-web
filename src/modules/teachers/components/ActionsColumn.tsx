@@ -10,6 +10,7 @@ import {
 import { PrivateRoutes } from "@/core/enums";
 import { Teacher } from "@/data/models";
 import { useModuleActions } from "@/modules/shared/hooks";
+import { useTeachers } from "@/modules/teachers/hooks";
 import { Row } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 
@@ -22,6 +23,7 @@ export const ActionsColumn = ({ row }: Props) => {
     PrivateRoutes.TEACHER_CREATE,
     PrivateRoutes.TEACHER_DETAIL,
   );
+  const { isLoading, handleDelete } = useTeachers();
 
   return (
     <DropdownMenu>
@@ -29,6 +31,7 @@ export const ActionsColumn = ({ row }: Props) => {
         <Button
           variant="ghost"
           className="h-8 w-8 p-0"
+          disabled={isLoading}
         >
           <span className="sr-only">Abrir menu</span>
           <MoreHorizontal className="h-4 w-4" />
@@ -39,6 +42,9 @@ export const ActionsColumn = ({ row }: Props) => {
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => handleNavigation(row.original.id)}>
           Ver Detalles
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => handleDelete(row.original.id)}>
+          Eliminar
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

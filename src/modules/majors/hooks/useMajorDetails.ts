@@ -1,7 +1,7 @@
 import { PrivateRoutes } from "@/core/enums";
 import { useToast } from "@/core/hooks";
 import { useAppDispatch, useAppSelector } from "@/core/store/hooks";
-import { setMajorMessage } from "@/core/store/slices";
+import { setMajorMessage, setSelectedMajor } from "@/core/store/slices";
 import { createMajor, getMajorById, updateMajor } from "@/core/store/thunks";
 import { FormTypes } from "@/core/types";
 import { CareerDto } from "@/data/dto";
@@ -46,6 +46,7 @@ export const useMajorDetails = () => {
   };
 
   const onCancel = () => {
+    dispatch(setSelectedMajor(null));
     navigate(PrivateRoutes.MAJOR);
   };
 
@@ -72,6 +73,7 @@ export const useMajorDetails = () => {
         description: majorMessage,
       });
       dispatch(setMajorMessage(""));
+      dispatch(setSelectedMajor(null));
       navigate(PrivateRoutes.MAJOR);
     }
   }, [majorMessage, toast, navigate, dispatch]);

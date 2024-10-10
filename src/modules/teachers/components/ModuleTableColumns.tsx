@@ -50,10 +50,10 @@ export const ModuleTableColumns: ColumnDef<Teacher>[] = [
     cell: ({ row }) => <div>{row.getValue("phone")}</div>,
   },
   {
-    accessorKey: "birthdate",
+    accessorKey: "birthday",
     header: "Fecha de nacimiento",
     cell: ({ row }) => (
-      <div>{moment(row.getValue("birthdate")).format("LLL")}</div>
+      <div>{moment(row.getValue("birthday")).format("LLL")}</div>
     ),
   },
   {

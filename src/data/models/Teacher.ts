@@ -7,7 +7,7 @@ export class Teacher extends BaseModel {
     updatedAt: Date,
     private _name: string,
     private _lastname: string,
-    private _birthdate: Date,
+    private _birthday: Date,
     private _address: string,
     private _phone: string,
     private _email: string,
@@ -31,12 +31,12 @@ export class Teacher extends BaseModel {
     this._lastname = value;
   }
 
-  public get birthdate(): Date {
-    return this._birthdate;
+  public get birthday(): Date {
+    return this._birthday;
   }
 
-  public set birthdate(value: Date) {
-    this._birthdate = value;
+  public set birthday(value: Date) {
+    this._birthday = value;
   }
 
   public get address(): string {
@@ -70,7 +70,7 @@ export class Teacher extends BaseModel {
       updatedAt: this.updatedAt,
       name: this._name,
       lastname: this._lastname,
-      birthday: this._birthdate,
+      birthday: this._birthday,
       address: this._address,
       phone: this._phone,
       email: this._email,
