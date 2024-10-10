@@ -9,6 +9,7 @@ import {
 } from "@/core/components/ui";
 import { PrivateRoutes } from "@/core/enums";
 import { Career } from "@/data/models";
+import { useMajors } from "@/modules/majors/hooks";
 import { useModuleActions } from "@/modules/shared/hooks";
 import { Row } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
@@ -22,6 +23,7 @@ export const ActionsColumn = ({ row }: Props) => {
     PrivateRoutes.MAJOR_CREATE,
     PrivateRoutes.MAJOR_DETAIL,
   );
+  const { isLoading, handleDelete } = useMajors();
 
   return (
     <DropdownMenu>
@@ -29,6 +31,7 @@ export const ActionsColumn = ({ row }: Props) => {
         <Button
           variant="ghost"
           className="h-8 w-8 p-0"
+          disabled={isLoading}
         >
           <span className="sr-only">Abrir menu</span>
           <MoreHorizontal className="h-4 w-4" />
@@ -39,6 +42,9 @@ export const ActionsColumn = ({ row }: Props) => {
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => handleNavigation(row.original.id)}>
           Ver Detalles
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => handleDelete(row.original.id)}>
+          Eliminar
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -1,4 +1,5 @@
 import { AsideMenu } from "@/core/components";
+import { Toaster } from "@/core/components/ui";
 
 type Props = {
   children: React.ReactNode | React.ReactNode[];
@@ -14,6 +15,7 @@ export const DashboardLayout = ({ children, header }: Props) => {
           {header}
         </header>
         <main className="p-12 overflow-y-auto">{children}</main>
+        <Toaster />
       </div>
     </div>
   );

@@ -1,35 +1,41 @@
 import { CareerDto } from "@/data/dto";
-import { IRepository } from "@/data/interfaces";
+import { IRepository, IResponse } from "@/data/interfaces";
 import { Career } from "@/data/models";
-import { MajorFactory } from "../factories";
+import { ApiAxiosInstance } from "@/core/lib/axios";
 
-const careerFactory = new MajorFactory();
+const api = ApiAxiosInstance.getInstance();
+const apiCareer = "/careers";
+
 export class CareerRepository implements IRepository<Career, CareerDto> {
   async getAll(): Promise<Career[]> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(Array.from({ length: 100 }, () => careerFactory.fake()));
-      }, 1000);
-    });
+    const response = await api.get<IResponse<Career[]>>(apiCareer);
+    return response.data.data;
   }
 
   async getById(id: number): Promise<Career> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(careerFactory.fake());
-      }, 1000);
-    });
+    const response = await api.get<IResponse<Career>>(`${apiCareer}/${id}`);
+    return response.data.data;
   }
 
   async create(data: CareerDto): Promise<Career> {
-    throw new Error("Method not implemented.");
+    const response = await api.post<IResponse<Career>>(apiCareer, data);
+    return response.data.data;
   }
 
-  async update(data: CareerDto): Promise<Career> {
-    throw new Error("Method not implemented.");
+  async update(id: number, data: CareerDto): Promise<Career> {
+    const response = await api.put<IResponse<Career>>(
+      `${apiCareer}/${id}`,
+      data,
+    );
+    return response.data.data;
   }
 
   async delete(id: number): Promise<boolean> {
-    throw new Error("Method not implemented.");
+    const response = await api.delete(`${apiCareer}/${id}`);
+    if (response.status === 204) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
