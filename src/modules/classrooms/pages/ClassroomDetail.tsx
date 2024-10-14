@@ -23,14 +23,10 @@ import { DashboardLayout } from "@/core/layouts";
 import { BreadcrumbForm } from "@/modules/classrooms/components";
 import { useClassroomDetails } from "@/modules/classrooms/hooks";
 import { SelectGroup } from "@radix-ui/react-select";
-import { useParams } from "react-router-dom";
 
 const ClassroomDetails = () => {
-  const { id } = useParams();
-  const { form, onCancel, onSubmit } = useClassroomDetails();
-
-  const title = id ? `Informacion del Salón ${id}` : "Crear Salón";
-  const formType = id ? "update" : "create";
+  const { id, title, formType, isLoading, form, onCancel, onSubmit } =
+    useClassroomDetails();
 
   return (
     <DashboardLayout
@@ -157,12 +153,14 @@ const ClassroomDetails = () => {
               <Button
                 className="w-1/4 bg-red-600 hover:bg-red-700"
                 onClick={onCancel}
+                disabled={isLoading}
               >
                 Cancelar
               </Button>
               <Button
                 className="w-1/4"
                 type="submit"
+                disabled={isLoading}
               >
                 Guardar
               </Button>
