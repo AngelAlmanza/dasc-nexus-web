@@ -1,37 +1,45 @@
+import { ApiAxiosInstance } from "@/core/lib/axios";
 import { ClassroomDto } from "@/data/dto";
-import { ClassroomFactory } from "@/data/factories";
-import { IRepository } from "@/data/interfaces";
+import { IRepository, IResponse } from "@/data/interfaces";
 import { Classroom } from "@/data/models";
 
-const classroomFactory = new ClassroomFactory();
+const api = ApiAxiosInstance.getInstance();
+const apiClassroom = "/classrooms";
+
 export class ClassroomRepository
   implements IRepository<Classroom, ClassroomDto>
 {
   async getAll(): Promise<Classroom[]> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(Array.from({ length: 100 }, () => classroomFactory.fake()));
-      }, 1000);
-    });
+    const response = await api.get<IResponse<Classroom[]>>(apiClassroom);
+    return response.data.data;
   }
 
   async getById(id: number): Promise<Classroom> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(classroomFactory.fake());
-      }, 1000);
-    });
+    const response = await api.get<IResponse<Classroom>>(
+      `${apiClassroom}/${id}`,
+    );
+    return response.data.data;
   }
 
   async create(data: ClassroomDto): Promise<Classroom> {
-    throw new Error("Method not implemented");
+    const response = await api.post<IResponse<Classroom>>(apiClassroom, data);
+    return response.data.data;
   }
 
   async update(id: number, data: ClassroomDto): Promise<Classroom> {
-    throw new Error("Method not implemented.");
+    const response = await api.put<IResponse<Classroom>>(
+      `${apiClassroom}/${id}`,
+      data,
+    );
+    return response.data.data;
   }
 
   async delete(id: number): Promise<boolean> {
-    throw new Error("Method not implemented.");
+    const response = await api.delete(`${apiClassroom}/${id}`);
+    if (response.status === 204) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
