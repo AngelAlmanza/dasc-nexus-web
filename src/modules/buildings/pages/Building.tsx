@@ -1,20 +1,61 @@
 import { ModuleHeaderComponent } from "@/core/components";
-import { Button } from "@/core/components/ui";
 import { PrivateRoutes } from "@/core/enums";
 import { DashboardLayout } from "@/core/layouts";
-import { BreadcrumbModule } from "@/modules/buildings/components";
-import { useNavigate } from "react-router-dom";
+import {
+  DataTableContent,
+  DataTableHeader,
+  DataTablePagination,
+} from "@/modules/shared/components";
+import { useDataTable, useModuleActions } from "@/modules/shared/hooks";
+
+import { ModuleTableColumns} from "@/modules/buildings/components/ModuleTableColumns";
+import { BreadcrumbModule } from "@/modules/buildings/components/BreadcrumbModule";
+import { useBuilding } from "../hooks";
+import { getColumnLabel } from "@/modules/buildings/utils";
+import {
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
 
 const Building = () => {
-  const navigate = useNavigate();
+  const { building } = useBuilding();
 
-  const handleGoToDetails = (id?: number) => {
-    if (id) {
-      navigate(`${PrivateRoutes.BUILDING_DETAIL}/${id}`);
-    } else {
-      navigate(PrivateRoutes.BUILDING_CREATE);
-    }
-  };
+  const { handleNavigation } = useModuleActions(
+    PrivateRoutes.BUILDING_CREATE,
+    PrivateRoutes.BUILDING_DETAIL,
+  );
+  const {
+    sorting,
+    columnFilters,
+    columnVisibility,
+    rowSelection,
+    setSorting,
+    setColumnFilters,
+    setColumnVisibility,
+    setRowSelection,
+  } = useDataTable();
+
+  const table = useReactTable({
+    data: building,
+    columns: ModuleTableColumns,
+    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
+    state: {
+      sorting,
+      columnFilters,
+      columnVisibility,
+      rowSelection,
+    },
+  });
 
   return (
     <DashboardLayout
@@ -25,9 +66,19 @@ const Building = () => {
         />
       }
     >
-      <p>Edificios</p>
-      <Button onClick={() => handleGoToDetails(23)}>Go to details</Button>
-      <Button onClick={() => handleGoToDetails()}>Go to create</Button>
+      <DataTableHeader
+        table={table}
+        searchInputColumnName="name"
+        searchInputColumnPlaceholder="Buscar por nombre"
+        createButtonLabel="Crear Edificio"
+        getColumnLabel={getColumnLabel}
+        handleNavigation={handleNavigation}
+      />
+      <DataTableContent
+        table={table}
+        columnsLength={ModuleTableColumns.length}
+      />
+      <DataTablePagination table={table} />
     </DashboardLayout>
   );
 };

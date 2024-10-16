@@ -10,6 +10,7 @@ import {
   UISlice,
 } from "@/core/store/slices";
 import { configureStore } from "@reduxjs/toolkit";
+import { BuildingSlice } from "./slices/buildingSlice";
 
 export const store = configureStore({
   reducer: {
@@ -22,5 +23,6 @@ export const store = configureStore({
     teacher: TeacherSlice.reducer,
     term: TermSlice.reducer,
     ui: UISlice.reducer,
+    building: BuildingSlice.reducer
   },
 });
