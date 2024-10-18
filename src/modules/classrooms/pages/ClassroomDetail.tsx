@@ -19,6 +19,7 @@ import {
   SelectValue,
   Textarea,
 } from "@/core/components/ui";
+import { RoomTypes } from "@/core/enums";
 import { DashboardLayout } from "@/core/layouts";
 import { BreadcrumbForm } from "@/modules/classrooms/components";
 import { useClassroomDetails } from "@/modules/classrooms/hooks";
@@ -77,17 +78,17 @@ const ClassroomDetails = () => {
                   <FormItem>
                     <FormLabel>Edificio</FormLabel>
                     <Select
-                      onValueChange={field.onChange}
-                      value={field.value}
+                      onValueChange={(value) => field.onChange(Number(value))}
+                      value={field.value?.toString()}
                     >
                       <SelectTrigger className="hover:bg-accent hover:text-accent-foreground">
                         <SelectValue placeholder="Selecciona un edificio" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
-                          <SelectItem value="building-a">Edificio A</SelectItem>
-                          <SelectItem value="building-b">Edificio B</SelectItem>
-                          <SelectItem value="building-c">Edificio C</SelectItem>
+                          <SelectItem value="1">Edificio A</SelectItem>
+                          <SelectItem value="2">Edificio B</SelectItem>
+                          <SelectItem value="3">Edificio C</SelectItem>
                         </SelectGroup>
                       </SelectContent>
                     </Select>
@@ -127,6 +128,34 @@ const ClassroomDetails = () => {
                         {...field}
                       />
                     </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="roomType"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Tipo de Salón</FormLabel>
+                    <Select
+                      onValueChange={(value) =>
+                        field.onChange(value as RoomTypes)
+                      }
+                      value={field.value}
+                    >
+                      <SelectTrigger className="hover:bg-accent hover:text-accent-foreground">
+                        <SelectValue placeholder="Selecciona un edificio" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectItem value={RoomTypes.LAB}>
+                            Laboratorio
+                          </SelectItem>
+                          <SelectItem value={RoomTypes.SAL}>Salón</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}

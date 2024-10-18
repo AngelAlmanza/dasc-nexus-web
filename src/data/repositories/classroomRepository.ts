@@ -4,7 +4,7 @@ import { IRepository, IResponse } from "@/data/interfaces";
 import { Classroom } from "@/data/models";
 
 const api = ApiAxiosInstance.getInstance();
-const apiClassroom = "/classrooms";
+const apiClassroom = "/rooms";
 
 export class ClassroomRepository
   implements IRepository<Classroom, ClassroomDto>

@@ -8,9 +8,9 @@ import {
 } from "@/modules/shared/components";
 import { useDataTable, useModuleActions } from "@/modules/shared/hooks";
 
-import { ModuleTableColumns} from "@/modules/buildings/components/ModuleTableColumns";
 import { BreadcrumbModule } from "@/modules/buildings/components/BreadcrumbModule";
-import { useBuilding } from "../hooks";
+import { ModuleTableColumns } from "@/modules/buildings/components/ModuleTableColumns";
+import { useBuilding } from "@/modules/buildings/hooks";
 import { getColumnLabel } from "@/modules/buildings/utils";
 import {
   getCoreRowModel,

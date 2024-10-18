@@ -8,7 +8,8 @@ export class Classroom extends BaseModel {
     private _name: string,
     private _building: number,
     private _floor: number,
-    private _long_description: string,
+    private _long_desc: string,
+    private _capacity: number,
   ) {
     super(id, createdAt, updatedAt);
   }
@@ -37,12 +38,20 @@ export class Classroom extends BaseModel {
     this._floor = value;
   }
 
-  public get long_description(): string {
-    return this._long_description;
+  public get long_desc(): string {
+    return this.long_desc;
   }
 
-  public set long_description(value: string) {
-    this._long_description = value;
+  public set long_desc(value: string) {
+    this.long_desc = value;
+  }
+
+  public get capacity(): number {
+    return this._capacity;
+  }
+
+  public set capacity(value: number) {
+    this._capacity = value;
   }
 
   public toJSON(): object {
@@ -53,7 +62,8 @@ export class Classroom extends BaseModel {
       name: this._name,
       building: this._building,
       floor: this._floor,
-      long_description: this._long_description,
+      long_desc: this._long_desc,
+      capacity: this._capacity,
     };
   }
 }

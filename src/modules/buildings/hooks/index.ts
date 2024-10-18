@@ -1,2 +1,2 @@
-export * from './useBuildingDetails'
-export * from './useBuilding'
+export * from "./useBuilding";
+export * from "./useBuildingDetails";

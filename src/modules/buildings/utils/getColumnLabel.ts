@@ -1,5 +1,5 @@
-import { COLUMN_LABELS } from "@/modules/buildings/constants/columnLabel";
-import { KeyBuildingColumns } from "@/modules/buildings/types/columnLabel";
+import { COLUMN_LABELS } from "@/modules/buildings/constants";
+import { KeyBuildingColumns } from "@/modules/buildings/types";
 
 export const getColumnLabel = (column: KeyBuildingColumns) =>
-    COLUMN_LABELS[column];
+  COLUMN_LABELS[column];

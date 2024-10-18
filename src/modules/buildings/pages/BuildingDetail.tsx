@@ -1,9 +1,4 @@
 import { ModuleHeaderComponent } from "@/core/components";
-import { DashboardLayout } from "@/core/layouts";
-import { BreadcrumbForm } from "@/modules/buildings/components";
-import { useParams } from "react-router-dom";
-import { convertToNumber } from "@/modules/shared/utils";
-import { useBuildingDetails } from "../hooks/useBuildingDetails";
 import {
   Button,
   Card,
@@ -18,6 +13,12 @@ import {
   FormMessage,
   Input,
 } from "@/core/components/ui";
+import { DashboardLayout } from "@/core/layouts";
+import { BreadcrumbForm } from "@/modules/buildings/components";
+import { useBuildingDetails } from "@/modules/buildings/hooks";
+import { convertToNumber } from "@/modules/shared/utils";
+import { useParams } from "react-router-dom";
+
 const BuildingDetails = () => {
   const { id } = useParams();
   const { form, onCancel, onSubmit } = useBuildingDetails();
@@ -46,7 +47,9 @@ const BuildingDetails = () => {
         >
           <Card>
             <CardHeader>
-              <h2 className="text-xl font-semibold">Información del Edificio</h2>
+              <h2 className="text-xl font-semibold">
+                Información del Edificio
+              </h2>
             </CardHeader>
             <CardContent className="grid grid-cols-2 gap-4">
               <FormField
@@ -101,7 +104,6 @@ const BuildingDetails = () => {
                 Guardar
               </Button>
             </CardFooter>
-
           </Card>
         </form>
       </Form>

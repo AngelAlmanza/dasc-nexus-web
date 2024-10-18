@@ -106,7 +106,7 @@ const TeacherDetails = () => {
                           {field.value ? (
                             format(field.value, "PPP")
                           ) : (
-                            <span>Pick a date</span>
+                            <span>Selecciona una Fecha</span>
                           )}
                           <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                         </Button>
@@ -120,6 +120,7 @@ const TeacherDetails = () => {
                           selected={field.value}
                           onSelect={field.onChange}
                           initialFocus
+                          fromYear={1980}
                         />
                       </PopoverContent>
                     </Popover>

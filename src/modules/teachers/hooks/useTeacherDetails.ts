@@ -21,7 +21,10 @@ const formSchema = z.object({
   lastname: z.string().min(6, "El apellido debe tener al menos 6 carácteres"),
   birthday: z.date(),
   address: z.string().min(6, "La dirección debe tener al menos 6 carácteres"),
-  phone: z.string().min(10, "El teléfono debe tener al menos 10 carácteres"),
+  phone: z
+    .string()
+    .min(10, "El teléfono debe tener al menos 10 carácteres")
+    .regex(/^\d+$/, "El teléfono solo debe contener números"),
   email: z.string().email("El email no es válido"),
 });
 
@@ -41,7 +44,7 @@ export const useTeacherDetails = () => {
     defaultValues: {
       name: "",
       lastname: "",
-      birthday: new Date(),
+      birthday: moment("2000-01-01").toDate(),
       address: "",
       phone: "",
       email: "",

@@ -1,4 +1,4 @@
-import { PrivateRoutes } from "@/core/enums";
+import { PrivateRoutes, RoomTypes } from "@/core/enums";
 import { useToast } from "@/core/hooks";
 import { useAppDispatch, useAppSelector } from "@/core/store/hooks";
 import { setClassroomMessage, setSelectedClassroom } from "@/core/store/slices";
@@ -17,12 +17,16 @@ import { z } from "zod";
 
 const formSchema = z.object({
   name: z.string().min(6, "El nombre debe tener al menos 6 carácteres"),
-  building: z.string().min(6, "El edificio debe tener al menos 6 carácteres"),
+  building: z
+    .number()
+    .int()
+    .min(1, "El edificio debe ser mayor a 0")
+    .max(3, "El edificio debe ser menor a 4"),
   floor: z
     .number()
     .int()
     .min(1, "El piso debe ser mayor a 0")
-    .max(2, "El piso debe ser menor a 100"),
+    .max(2, "El piso debe ser menor a 3"),
   description: z
     .string()
     .min(6, "La descripción debe tener al menos 6 carácteres"),
@@ -31,6 +35,10 @@ const formSchema = z.object({
     .int()
     .min(15, "La capacidad debe ser mayor a 14")
     .max(50, "La capacidad debe ser menor a 50"),
+  roomType: z.nativeEnum(RoomTypes, {
+    message: "Tipo de aula no permitido",
+    required_error: "Tipo de aula requerido",
+  }),
 });
 
 export const useClassroomDetails = () => {
@@ -48,7 +56,7 @@ export const useClassroomDetails = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      building: "",
+      building: undefined,
       floor: 1,
       description: "",
       capacity: 15,
@@ -60,7 +68,9 @@ export const useClassroomDetails = () => {
       name: data.name,
       building: Number(data.building),
       floor: data.floor,
-      long_description: data.description,
+      long_desc: data.description,
+      capacity: data.capacity,
+      type: data.roomType,
     };
 
     if (formType === "create") {
@@ -87,9 +97,9 @@ export const useClassroomDetails = () => {
     if (selectedClassroom) {
       form.reset({
         name: selectedClassroom.name,
-        building: selectedClassroom.building.toString(),
+        building: selectedClassroom.building,
         floor: selectedClassroom.floor,
-        description: selectedClassroom.long_description,
+        description: selectedClassroom.long_desc,
       });
     }
   }, [selectedClassroom, form]);

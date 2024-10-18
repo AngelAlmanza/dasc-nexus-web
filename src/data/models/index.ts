@@ -1,4 +1,5 @@
 export * from "./BaseModel";
+export * from "./Building";
 export * from "./Career";
 export * from "./Classroom";
 export * from "./Group";

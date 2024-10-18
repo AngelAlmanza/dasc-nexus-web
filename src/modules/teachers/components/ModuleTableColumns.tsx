@@ -53,7 +53,7 @@ export const ModuleTableColumns: ColumnDef<Teacher>[] = [
     accessorKey: "birthday",
     header: "Fecha de nacimiento",
     cell: ({ row }) => (
-      <div>{moment(row.getValue("birthday")).format("LLL")}</div>
+      <div>{moment(row.getValue("birthday")).format("DD/MM/YYYY")}</div>
     ),
   },
   {
