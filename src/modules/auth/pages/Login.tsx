@@ -14,39 +14,26 @@ import {
   FormLabel,
   FormMessage,
   Input,
+  Toaster,
 } from "@/core/components/ui";
 import { PrivateRoutes } from "@/core/enums";
-import { useAppDispatch, useAppSelector } from "@/core/store/hooks";
-import { setIsAuthenticated } from "@/core/store/slices";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { Navigate, useNavigate } from "react-router-dom";
-import { z } from "zod";
-
-const formSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(6),
-});
+import { useAppDispatch } from "@/core/store/hooks";
+import { setIsAuthenticated, setToken } from "@/core/store/slices";
+import { useLogin } from "@/modules/auth/hooks";
+import { getAuthToken } from "@/modules/auth/utils";
+import { useEffect } from "react";
+import { Navigate } from "react-router-dom";
 
 const Login = () => {
-  const navigate = useNavigate();
+  const { form, isAuthenticated, onSubmit } = useLogin();
   const dispatch = useAppDispatch();
-  const { isAuthenticated } = useAppSelector((state) => state.auth);
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
 
-  const onSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log(data);
-    setTimeout(() => {
-      dispatch(setIsAuthenticated(true));
-      navigate(PrivateRoutes.DASHBOARD);
-    }, 2000);
-  };
+  useEffect(() => {
+    const token = getAuthToken();
+    if (!token) return;
+    dispatch(setToken(token));
+    dispatch(setIsAuthenticated(true));
+  }, [dispatch]);
 
   if (isAuthenticated) {
     return <Navigate to={PrivateRoutes.DASHBOARD} />;
@@ -134,6 +121,7 @@ const Login = () => {
         />
         <div className="absolute top-0 right-0 w-full h-full bg-blue-950 opacity-25"></div>
       </section>
+      <Toaster />
     </main>
   );
 };
