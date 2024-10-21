@@ -5,7 +5,8 @@ export const COLUMN_LABELS: ColumnLabel = {
   name: "Nombre",
   building: "Edificio",
   floor: "Piso",
-  long_description: "Descripción",
+  long_desc: "Descripción",
+  capacity: "Capacidad",
   createdAt: "Creado",
   updatedAt: "Actualizado",
 };

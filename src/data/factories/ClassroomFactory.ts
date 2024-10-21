@@ -12,6 +12,7 @@ export class ClassroomFactory implements IFactory<Classroom> {
       faker.number.int({ min: 1, max: 2 }),
       faker.number.int({ min: 1, max: 2 }),
       faker.lorem.paragraph(4),
+      faker.number.int({ min: 1, max: 100 }),
     );
   }
 }

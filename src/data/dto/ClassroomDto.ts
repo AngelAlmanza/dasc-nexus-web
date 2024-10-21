@@ -1,4 +1,4 @@
-import { RoomTypes } from "@/core/types";
+import { RoomTypes } from "@/core/enums";
 
 export interface ClassroomDto {
   name: string;
