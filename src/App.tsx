@@ -52,6 +52,10 @@ const BuildingDetail = lazy(
   () => import("@/modules/buildings/pages/BuildingDetail"),
 );
 
+// Plan Module
+const Plan = lazy(() => import("@/modules/plans/pages/Plan"));
+const PlanDetail = lazy(() => import("@/modules/plans/pages/PlanDetail"));
+
 function App() {
   return (
     <Provider store={store}>
@@ -161,6 +165,19 @@ function App() {
               <Route
                 path={`${PrivateRoutes.BUILDING_DETAIL}/:id`}
                 element={<BuildingDetail />}
+              />
+
+              <Route
+                path={PrivateRoutes.PLAN}
+                element={<Plan />}
+              />
+              <Route
+                path={PrivateRoutes.PLAN_CREATE}
+                element={<PlanDetail />}
+              />
+              <Route
+                path={`${PrivateRoutes.PLAN_DETAIL}/:id`}
+                element={<PlanDetail />}
               />
             </Route>
           </RoutesWithNotFound>

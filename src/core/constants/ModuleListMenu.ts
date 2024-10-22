@@ -1,15 +1,16 @@
+import { PrivateRoutes } from "@/core/enums";
 import { IAsideLinks } from "@/core/interfaces";
 import {
   BookMinus,
   BookUser,
   Building,
+  ChartNoAxesGantt,
   GraduationCap,
   LayoutDashboard,
   School,
   ScrollText,
   Users,
 } from "lucide-react";
-import { PrivateRoutes } from "@/core/enums";
 
 export const ModuleListMenu: IAsideLinks[] = [
   {
@@ -59,5 +60,11 @@ export const ModuleListMenu: IAsideLinks[] = [
     icon: Building,
     variant: "default",
     to: PrivateRoutes.BUILDING,
+  },
+  {
+    title: "Planes de Estudio",
+    icon: ChartNoAxesGantt,
+    variant: "default",
+    to: PrivateRoutes.PLAN,
   },
 ];

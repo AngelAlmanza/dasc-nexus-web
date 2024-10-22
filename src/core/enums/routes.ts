@@ -26,4 +26,7 @@ export enum PrivateRoutes {
   CLASSROOM = "/classroom",
   CLASSROOM_DETAIL = "/classroom/detail",
   CLASSROOM_CREATE = "/classroom/create",
+  PLAN = "/plan",
+  PLAN_DETAIL = "/plan/detail",
+  PLAN_CREATE = "/plan/create",
 }

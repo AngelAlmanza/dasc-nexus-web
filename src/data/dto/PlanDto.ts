@@ -1,5 +1,6 @@
 export interface PlanDto {
-  init: Date;
-  end: Date;
-  id_career: number;
+  init: string;
+  end: string;
+  career_id: number;
+  name: string;
 }
