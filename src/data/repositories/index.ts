@@ -1,6 +1,7 @@
 export * from "./buildingRepository";
 export * from "./careerRepository";
 export * from "./classroomRepository";
+export * from "./dashboardRepository";
 export * from "./groupRepository";
 export * from "./planRepository";
 export * from "./roomActiveRepository";

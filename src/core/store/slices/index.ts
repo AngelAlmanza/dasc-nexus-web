@@ -1,6 +1,7 @@
 export * from "./authSlice";
 export * from "./buildingSlice";
 export * from "./classroomSlice";
+export * from "./dashboardSlice";
 export * from "./groupSlice";
 export * from "./majorSlice";
 export * from "./planSlice";

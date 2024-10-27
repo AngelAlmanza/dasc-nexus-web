@@ -1,6 +1,7 @@
 export * from "./authThunks";
 export * from "./buildingThunks";
 export * from "./classroomThunks";
+export * from "./dashboardThunks";
 export * from "./groupThunks";
 export * from "./majorThunks";
 export * from "./planThunks";

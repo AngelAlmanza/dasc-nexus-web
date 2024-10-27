@@ -1,5 +1,7 @@
+import { useToast } from "@/core/hooks";
 import { useAppDispatch, useAppSelector } from "@/core/store/hooks";
-import { getClassrooms, getMajors, getTeachers } from "@/core/store/thunks";
+import { setDashboardMessage } from "@/core/store/slices";
+import { getDashboardInfo } from "@/core/store/thunks";
 import { ICON_DEFAULT_SIZE } from "@/modules/dashboard/constants";
 import { DashboardInformation } from "@/modules/dashboard/types";
 import {
@@ -13,15 +15,20 @@ import { useEffect, useMemo } from "react";
 
 export const useDashboard = () => {
   const dispatch = useAppDispatch();
-  const { classrooms } = useAppSelector((state) => state.classroom);
-  const { majors } = useAppSelector((state) => state.major);
-  const { teachers } = useAppSelector((state) => state.teacher);
+  const {
+    careerCount,
+    teacherCount,
+    studentCount,
+    classroomCount,
+    dashboardMessage,
+  } = useAppSelector((state) => state.dashboard);
+  const { toast } = useToast();
 
   const dashboardInformation = useMemo((): DashboardInformation[] => {
     return [
       {
         title: "Salones",
-        content: `${classrooms.length} salones disponibles`,
+        content: `${classroomCount} salones disponibles`,
         icon: <School size={ICON_DEFAULT_SIZE} />,
       },
       {
@@ -31,26 +38,34 @@ export const useDashboard = () => {
       },
       {
         title: "Maestros",
-        content: `${teachers.length} maestros`,
+        content: `${teacherCount} maestros`,
         icon: <Users size={ICON_DEFAULT_SIZE} />,
       },
       {
         title: "Estudiantes",
-        content: "450 estudiantes",
+        content: `${studentCount} estudiantes`,
         icon: <BookUser size={ICON_DEFAULT_SIZE} />,
       },
       {
         title: "Carreras",
-        content: `${majors.length} carreras disponibles`,
+        content: `${careerCount} carreras disponibles`,
         icon: <GraduationCap size={ICON_DEFAULT_SIZE} />,
       },
     ];
-  }, [classrooms, majors, teachers]);
+  }, [careerCount, teacherCount, studentCount, classroomCount]);
 
   useEffect(() => {
-    dispatch(getClassrooms());
-    dispatch(getMajors());
-    dispatch(getTeachers());
+    if (dashboardMessage && dashboardMessage.length > 0) {
+      toast({
+        title: "Dashboard",
+        description: dashboardMessage,
+      });
+      dispatch(setDashboardMessage(""));
+    }
+  }, [dashboardMessage, toast, dispatch]);
+
+  useEffect(() => {
+    dispatch(getDashboardInfo());
   }, [dispatch]);
 
   return {
