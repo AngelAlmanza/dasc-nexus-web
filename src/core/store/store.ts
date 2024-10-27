@@ -1,6 +1,8 @@
 import {
   AuthSlice,
+  BuildingSlice,
   ClassroomSlice,
+  GroupSlice,
   MajorSlice,
   PlanSlice,
   ScheduleSlice,
@@ -10,12 +12,13 @@ import {
   UISlice,
 } from "@/core/store/slices";
 import { configureStore } from "@reduxjs/toolkit";
-import { BuildingSlice } from "./slices/buildingSlice";
 
 export const store = configureStore({
   reducer: {
     auth: AuthSlice.reducer,
+    building: BuildingSlice.reducer,
     classroom: ClassroomSlice.reducer,
+    group: GroupSlice.reducer,
     major: MajorSlice.reducer,
     plan: PlanSlice.reducer,
     schedule: ScheduleSlice.reducer,
@@ -23,6 +26,5 @@ export const store = configureStore({
     teacher: TeacherSlice.reducer,
     term: TermSlice.reducer,
     ui: UISlice.reducer,
-    building: BuildingSlice.reducer
   },
 });

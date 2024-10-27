@@ -6,6 +6,7 @@ import {
   Building,
   ChartNoAxesGantt,
   GraduationCap,
+  Group,
   LayoutDashboard,
   School,
   ScrollText,
@@ -66,5 +67,11 @@ export const ModuleListMenu: IAsideLinks[] = [
     icon: ChartNoAxesGantt,
     variant: "default",
     to: PrivateRoutes.PLAN,
+  },
+  {
+    title: "Grupos",
+    icon: Group,
+    variant: "default",
+    to: PrivateRoutes.GROUP,
   },
 ];

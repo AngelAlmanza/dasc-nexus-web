@@ -56,6 +56,10 @@ const BuildingDetail = lazy(
 const Plan = lazy(() => import("@/modules/plans/pages/Plan"));
 const PlanDetail = lazy(() => import("@/modules/plans/pages/PlanDetail"));
 
+// Group Module
+const Group = lazy(() => import("@/modules/groups/pages/Group"));
+const GroupDetail = lazy(() => import("@/modules/groups/pages/GroupDetail"));
+
 function App() {
   return (
     <Provider store={store}>
@@ -178,6 +182,19 @@ function App() {
               <Route
                 path={`${PrivateRoutes.PLAN_DETAIL}/:id`}
                 element={<PlanDetail />}
+              />
+
+              <Route
+                path={PrivateRoutes.GROUP}
+                element={<Group />}
+              />
+              <Route
+                path={PrivateRoutes.GROUP_CREATE}
+                element={<GroupDetail />}
+              />
+              <Route
+                path={`${PrivateRoutes.GROUP_DETAIL}/:id`}
+                element={<GroupDetail />}
               />
             </Route>
           </RoutesWithNotFound>

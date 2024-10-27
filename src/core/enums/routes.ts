@@ -29,4 +29,7 @@ export enum PrivateRoutes {
   PLAN = "/plan",
   PLAN_DETAIL = "/plan/detail",
   PLAN_CREATE = "/plan/create",
+  GROUP = "/group",
+  GROUP_DETAIL = "/group/detail",
+  GROUP_CREATE = "/group/create",
 }

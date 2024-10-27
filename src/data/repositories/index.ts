@@ -1,3 +1,4 @@
+export * from "./buildingRepository";
 export * from "./careerRepository";
 export * from "./classroomRepository";
 export * from "./groupRepository";
