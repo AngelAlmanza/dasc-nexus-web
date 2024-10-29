@@ -25,8 +25,17 @@ import { BreadcrumbForm } from "@/modules/subjects/components";
 import { useSubjectDetails } from "@/modules/subjects/hooks";
 
 const SubjectDetails = () => {
-  const { id, title, formType, form, isLoading, onCancel, onSubmit } =
-    useSubjectDetails();
+  const {
+    id,
+    title,
+    formType,
+    form,
+    isLoading,
+    majors,
+    plans,
+    onCancel,
+    onSubmit,
+  } = useSubjectDetails();
 
   return (
     <DashboardLayout
@@ -63,6 +72,7 @@ const SubjectDetails = () => {
                     <FormControl>
                       <Input
                         type="text"
+                        placeholder="Nombre de la Materia"
                         {...field}
                       />
                     </FormControl>
@@ -79,6 +89,7 @@ const SubjectDetails = () => {
                     <FormControl>
                       <Input
                         type="text"
+                        placeholder="Clave de la Materia"
                         {...field}
                       />
                     </FormControl>
@@ -168,33 +179,6 @@ const SubjectDetails = () => {
               />
               <FormField
                 control={form.control}
-                name="area"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Área</FormLabel>
-                    <FormControl>
-                      <Select
-                        onValueChange={field.onChange}
-                        value={field.value}
-                      >
-                        <SelectTrigger>
-                          <SelectValue placeholder="Selecciona un área" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectGroup>
-                            <SelectItem value="area1">Área 1</SelectItem>
-                            <SelectItem value="area2">Área 2</SelectItem>
-                            <SelectItem value="area3">Área 3</SelectItem>
-                          </SelectGroup>
-                        </SelectContent>
-                      </Select>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
                 name="major"
                 render={({ field }) => (
                   <FormItem>
@@ -209,9 +193,14 @@ const SubjectDetails = () => {
                         </SelectTrigger>
                         <SelectContent>
                           <SelectGroup>
-                            <SelectItem value="ITC">ITC</SelectItem>
-                            <SelectItem value="LATII">LATII</SelectItem>
-                            <SelectItem value="IDS">IDS</SelectItem>
+                            {majors.map((major) => (
+                              <SelectItem
+                                key={major.id}
+                                value={major.id.toString()}
+                              >
+                                {major.name}
+                              </SelectItem>
+                            ))}
                           </SelectGroup>
                         </SelectContent>
                       </Select>
@@ -236,9 +225,14 @@ const SubjectDetails = () => {
                         </SelectTrigger>
                         <SelectContent>
                           <SelectGroup>
-                            <SelectItem value="2010">2010</SelectItem>
-                            <SelectItem value="2015">2015</SelectItem>
-                            <SelectItem value="2020">2020</SelectItem>
+                            {plans.map((plan) => (
+                              <SelectItem
+                                key={plan.id}
+                                value={plan.id.toString()}
+                              >
+                                {plan.name}
+                              </SelectItem>
+                            ))}
                           </SelectGroup>
                         </SelectContent>
                       </Select>

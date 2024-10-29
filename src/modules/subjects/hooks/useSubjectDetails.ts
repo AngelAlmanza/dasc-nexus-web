@@ -4,6 +4,8 @@ import { useAppDispatch, useAppSelector } from "@/core/store/hooks";
 import { setSelectedSubject, setSubjectMessage } from "@/core/store/slices";
 import {
   createSubject,
+  getMajors,
+  getPlans,
   getSubjectById,
   updateSubject,
 } from "@/core/store/thunks";
@@ -34,9 +36,9 @@ const formSchema = z.object({
     .number({ message: "El semestre debe ser un número" })
     .int()
     .positive("El semestre debe ser un número positivo"),
-  area: z.string().min(4, "El área debe tener al menos 6 carácteres"),
-  major: z.string().min(3, "La carrera debe tener al menos 3 carácteres"),
-  plan: z.string().min(4, "El plan debe tener al menos 6 carácteres"),
+  major: z.string().min(1, "La carrera debe tener al menos 3 carácteres"),
+  plan: z.string().min(1, "El plan debe tener al menos 6 carácteres"),
+  online: z.boolean(),
 });
 
 export const useSubjectDetails = () => {
@@ -46,6 +48,8 @@ export const useSubjectDetails = () => {
   const { isLoading, selectedSubject, subjectMessage } = useAppSelector(
     (state) => state.subject,
   );
+  const { majors } = useAppSelector((state) => state.major);
+  const { plans } = useAppSelector((state) => state.plan);
   const { toast } = useToast();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -59,9 +63,9 @@ export const useSubjectDetails = () => {
       theory_hours: 0,
       practice_hours: 0,
       semester: 0,
-      area: "",
       major: "",
       plan: "",
+      online: false,
     },
   });
 
@@ -73,9 +77,10 @@ export const useSubjectDetails = () => {
       theory_hours: data.theory_hours,
       practice_hours: data.practice_hours,
       total_hours: data.theory_hours + data.practice_hours,
-      id_area: Number(data.area),
       id_plan: Number(data.plan),
       id_career: Number(data.major),
+      semester: data.semester,
+      online: data.online,
     };
 
     if (formType === "update") {
@@ -106,7 +111,6 @@ export const useSubjectDetails = () => {
         credits: selectedSubject.credits,
         theory_hours: selectedSubject.theory_hours,
         practice_hours: selectedSubject.practice_hours,
-        area: selectedSubject.id_area.toString(),
         major: selectedSubject.career.id.toString(),
         plan: selectedSubject.plan.id.toString(),
       });
@@ -125,12 +129,19 @@ export const useSubjectDetails = () => {
     }
   }, [subjectMessage, toast, navigate, dispatch]);
 
+  useEffect(() => {
+    dispatch(getPlans());
+    dispatch(getMajors());
+  }, [dispatch]);
+
   return {
     id,
     formType,
     form,
     title,
     isLoading,
+    majors,
+    plans,
     onSubmit,
     onCancel,
   };

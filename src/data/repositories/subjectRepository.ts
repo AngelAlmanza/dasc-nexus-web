@@ -9,6 +9,7 @@ const apiSubject = "/subjects";
 export class SubjectRepository implements IRepository<Subject, SubjectDto> {
   async getAll(): Promise<Subject[]> {
     const response = await api.get<IResponse<Subject[]>>(apiSubject);
+    console.log(response.data.data);
     return response.data.data;
   }
 
