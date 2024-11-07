@@ -1,10 +1,10 @@
 import { Checkbox } from "@/core/components/ui";
-import { Teacher } from "@/data/models";
+import { ITeacher } from "@/data/models";
 import { ActionsColumn } from "@/modules/teachers/components";
 import { ColumnDef } from "@tanstack/react-table";
 import moment from "moment";
 
-export const ModuleTableColumns: ColumnDef<Teacher>[] = [
+export const ModuleTableColumns: ColumnDef<ITeacher>[] = [
   {
     id: "select",
     header: ({ table }) => (

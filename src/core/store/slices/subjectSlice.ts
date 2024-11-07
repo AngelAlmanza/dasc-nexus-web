@@ -5,12 +5,12 @@ import {
   updateSubject,
   deleteSubject,
 } from "@/core/store/thunks";
-import { Subject } from "@/data/models";
+import { ISubject } from "@/data/models";
 import { createSlice } from "@reduxjs/toolkit";
 
 interface SubjectState {
-  subjects: Subject[];
-  selectedSubject?: Subject;
+  subjects: ISubject[];
+  selectedSubject?: ISubject;
   isLoading: boolean;
   subjectMessage: string;
 }

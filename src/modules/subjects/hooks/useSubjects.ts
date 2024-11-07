@@ -4,7 +4,7 @@ import { setSubjectMessage } from "@/core/store/slices";
 import { deleteSubject, getSubjects } from "@/core/store/thunks";
 import { useEffect } from "react";
 
-export const useSubjects = () => {
+export const useSubjects = (requestSubjects = true) => {
   const dispatch = useAppDispatch();
   const { subjects, subjectMessage, isLoading } = useAppSelector(
     (state) => state.subject,
@@ -16,8 +16,9 @@ export const useSubjects = () => {
   };
 
   useEffect(() => {
+    if (!requestSubjects) return;
     dispatch(getSubjects());
-  }, [dispatch]);
+  }, [dispatch, requestSubjects]);
 
   useEffect(() => {
     if (subjectMessage && subjectMessage.length > 0) {

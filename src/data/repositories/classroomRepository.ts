@@ -1,37 +1,90 @@
 import { ApiAxiosInstance } from "@/core/lib/axios";
 import { ClassroomDto } from "@/data/dto";
-import { IRepository, IResponse } from "@/data/interfaces";
-import { Classroom } from "@/data/models";
+import { IRepository } from "@/data/interfaces";
+import {
+  CreateClassroomResponse,
+  GetClassroomResponse,
+  GetClassroomsResponse,
+  IClassroom,
+  UpdateClassroomResponse,
+} from "@/data/models";
 
 const api = ApiAxiosInstance.getInstance();
 const apiClassroom = "/rooms";
 
 export class ClassroomRepository
-  implements IRepository<Classroom, ClassroomDto>
+  implements IRepository<IClassroom, ClassroomDto>
 {
-  async getAll(): Promise<Classroom[]> {
-    const response = await api.get<IResponse<Classroom[]>>(apiClassroom);
-    return response.data.data;
+  async getAll(): Promise<IClassroom[]> {
+    const response = await api.get<GetClassroomsResponse>(apiClassroom);
+    const classrooms = response.data.data;
+    return classrooms.map((classroom) => ({
+      id: classroom.id,
+      name: classroom.name,
+      building: classroom.building,
+      floor: classroom.floor,
+      long_desc: classroom.long_desc,
+      capacity: classroom.capacity,
+      type: classroom.type,
+      createdAt: classroom.created_at,
+      updatedAt: classroom.updated_at,
+    }));
   }
 
-  async getById(id: number): Promise<Classroom> {
-    const response = await api.get<IResponse<Classroom>>(
+  async getById(id: number): Promise<IClassroom> {
+    const response = await api.get<GetClassroomResponse>(
       `${apiClassroom}/${id}`,
     );
-    return response.data.data;
+    const classroom = response.data.data;
+    return {
+      id: classroom.id,
+      name: classroom.name,
+      building: classroom.building,
+      floor: classroom.floor,
+      long_desc: classroom.long_desc,
+      capacity: classroom.capacity,
+      type: classroom.type,
+      createdAt: classroom.created_at,
+      updatedAt: classroom.updated_at,
+    };
   }
 
-  async create(data: ClassroomDto): Promise<Classroom> {
-    const response = await api.post<IResponse<Classroom>>(apiClassroom, data);
-    return response.data.data;
+  async create(data: ClassroomDto): Promise<IClassroom> {
+    const response = await api.post<CreateClassroomResponse>(
+      apiClassroom,
+      data,
+    );
+    const classroom = response.data.data;
+    return {
+      id: classroom.id,
+      name: classroom.name,
+      building: classroom.building,
+      floor: classroom.floor,
+      long_desc: classroom.long_desc,
+      capacity: classroom.capacity,
+      type: classroom.type,
+      createdAt: classroom.created_at,
+      updatedAt: classroom.updated_at,
+    };
   }
 
-  async update(id: number, data: ClassroomDto): Promise<Classroom> {
-    const response = await api.put<IResponse<Classroom>>(
+  async update(id: number, data: ClassroomDto): Promise<IClassroom> {
+    const response = await api.put<UpdateClassroomResponse>(
       `${apiClassroom}/${id}`,
       data,
     );
-    return response.data.data;
+    const classroom = response.data.data;
+    return {
+      id: classroom.id,
+      name: classroom.name,
+      building: classroom.building,
+      floor: classroom.floor,
+      long_desc: classroom.long_desc,
+      capacity: classroom.capacity,
+      type: classroom.type,
+      createdAt: classroom.created_at,
+      updatedAt: classroom.updated_at,
+    };
   }
 
   async delete(id: number): Promise<boolean> {

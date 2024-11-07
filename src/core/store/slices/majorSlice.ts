@@ -5,12 +5,12 @@ import {
   getMajors,
   updateMajor,
 } from "@/core/store/thunks";
-import { Career } from "@/data/models";
+import { ICareer } from "@/data/models";
 import { createSlice } from "@reduxjs/toolkit";
 
 interface MajorState {
-  majors: Career[];
-  selectedMajor?: Career;
+  majors: ICareer[];
+  selectedMajor?: ICareer;
   isLoading: boolean;
   majorMessage: string;
 }

@@ -69,8 +69,8 @@ function Group() {
     >
       <DataTableHeader
         table={table}
-        searchInputColumnName="careerId"
-        searchInputColumnPlaceholder="Buscar por carrera"
+        searchInputColumnName="semester"
+        searchInputColumnPlaceholder="Buscar por semestre"
         createButtonLabel="Crear Grupo"
         getColumnLabel={getColumnLabel}
         handleNavigation={handleNavigation}

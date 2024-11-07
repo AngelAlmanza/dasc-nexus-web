@@ -1,10 +1,9 @@
 import { Checkbox } from "@/core/components/ui";
-import { Plan } from "@/data/models";
+import { ICareer, IPlan } from "@/data/models";
 import { ActionsColumn } from "@/modules/plans/components";
 import { ColumnDef } from "@tanstack/react-table";
-import moment from "moment";
 
-export const ModuleTableColumns: ColumnDef<Plan>[] = [
+export const ModuleTableColumns: ColumnDef<IPlan>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -33,6 +32,11 @@ export const ModuleTableColumns: ColumnDef<Plan>[] = [
     cell: ({ row }) => <div>{row.getValue("name")}</div>,
   },
   {
+    accessorKey: "career",
+    header: "Carrera",
+    cell: ({ row }) => <div>{(row.getValue("career") as ICareer).name}</div>,
+  },
+  {
     accessorKey: "start",
     header: "Inicio del plan",
     cell: ({ row }) => <div>{row.getValue("start")}</div>,
@@ -41,13 +45,6 @@ export const ModuleTableColumns: ColumnDef<Plan>[] = [
     accessorKey: "end",
     header: "Fin del plan",
     cell: ({ row }) => <div>{row.getValue("end")}</div>,
-  },
-  {
-    accessorKey: "createdAt",
-    header: "Fecha de creación",
-    cell: ({ row }) => (
-      <div>{moment(row.getValue("createdAt")).format("LLL")}</div>
-    ),
   },
   {
     id: "actions",

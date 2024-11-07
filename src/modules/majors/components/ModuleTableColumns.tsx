@@ -1,10 +1,10 @@
 import { Checkbox } from "@/core/components/ui";
-import { Career } from "@/data/models";
+import { ICareer } from "@/data/models";
 import { ActionsColumn } from "@/modules/majors/components";
 import { ColumnDef } from "@tanstack/react-table";
 import moment from "moment";
 
-export const ModuleTableColumns: ColumnDef<Career>[] = [
+export const ModuleTableColumns: ColumnDef<ICareer>[] = [
   {
     id: "select",
     header: ({ table }) => (

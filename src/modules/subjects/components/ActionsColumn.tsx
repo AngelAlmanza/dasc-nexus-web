@@ -8,13 +8,14 @@ import {
   DropdownMenuTrigger,
 } from "@/core/components/ui";
 import { PrivateRoutes } from "@/core/enums";
-import { Subject } from "@/data/models";
+import { ISubject } from "@/data/models";
 import { useModuleActions } from "@/modules/shared/hooks";
+import { useSubjects } from "@/modules/subjects/hooks";
 import { Row } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 
 type Props = {
-  row: Row<Subject>;
+  row: Row<ISubject>;
 };
 
 export const ActionsColumn = ({ row }: Props) => {
@@ -22,6 +23,7 @@ export const ActionsColumn = ({ row }: Props) => {
     PrivateRoutes.SUBJECT_CREATE,
     PrivateRoutes.SUBJECT_DETAIL,
   );
+  const { isLoading, handleDelete } = useSubjects(false);
 
   return (
     <DropdownMenu>
@@ -29,6 +31,7 @@ export const ActionsColumn = ({ row }: Props) => {
         <Button
           variant="ghost"
           className="h-8 w-8 p-0"
+          disabled={isLoading}
         >
           <span className="sr-only">Abrir menu</span>
           <MoreHorizontal className="h-4 w-4" />
@@ -39,6 +42,9 @@ export const ActionsColumn = ({ row }: Props) => {
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => handleNavigation(row.original.id)}>
           Ver Detalles
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => handleDelete(row.original.id)}>
+          Eliminar
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -1,12 +1,12 @@
 import { Button } from "@/core/components/ui";
-import { BaseModel } from "@/data/models";
+import { IBaseModel } from "@/data/models";
 import { Table } from "@tanstack/react-table";
 
-type Props<K extends BaseModel> = {
+type Props<K extends IBaseModel> = {
   table: Table<K>;
 };
 
-export const DataTablePagination = <K extends BaseModel>({
+export const DataTablePagination = <K extends IBaseModel>({
   table,
 }: Props<K>) => {
   return (

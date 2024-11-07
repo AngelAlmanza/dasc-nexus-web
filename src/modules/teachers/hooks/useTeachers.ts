@@ -4,7 +4,7 @@ import { setTeacherMessage } from "@/core/store/slices";
 import { deleteTeacher, getTeachers } from "@/core/store/thunks";
 import { useEffect } from "react";
 
-export const useTeachers = () => {
+export const useTeachers = (requestTeachers = true) => {
   const dispatch = useAppDispatch();
   const { teachers, teacherMessage, isLoading } = useAppSelector(
     (state) => state.teacher,
@@ -16,8 +16,9 @@ export const useTeachers = () => {
   };
 
   useEffect(() => {
+    if (!requestTeachers) return;
     dispatch(getTeachers());
-  }, [dispatch]);
+  }, [dispatch, requestTeachers]);
 
   useEffect(() => {
     if (teacherMessage && teacherMessage.length > 0) {

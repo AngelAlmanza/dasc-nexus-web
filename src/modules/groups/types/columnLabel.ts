@@ -1,4 +1,4 @@
-import { Group } from "@/data/models";
+import { IGroup } from "@/data/models";
 
-export type KeysGroupColumns = Exclude<keyof Group, "toJSON">;
+export type KeysGroupColumns = keyof IGroup;
 export type ColumnLabel = Record<KeysGroupColumns, string>;

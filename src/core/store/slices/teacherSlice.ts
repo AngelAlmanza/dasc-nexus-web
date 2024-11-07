@@ -5,12 +5,12 @@ import {
   getTeachers,
   updateTeacher,
 } from "@/core/store/thunks";
-import { Teacher } from "@/data/models";
+import { ITeacher } from "@/data/models";
 import { createSlice } from "@reduxjs/toolkit";
 
 interface TeacherState {
-  teachers: Teacher[];
-  selectedTeacher?: Teacher;
+  teachers: ITeacher[];
+  selectedTeacher?: ITeacher;
   isLoading: boolean;
   teacherMessage: string;
 }

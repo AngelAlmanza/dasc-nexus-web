@@ -8,14 +8,14 @@ import {
   DropdownMenuTrigger,
 } from "@/core/components/ui";
 import { PrivateRoutes } from "@/core/enums";
-import { Teacher } from "@/data/models";
+import { ITeacher } from "@/data/models";
 import { useModuleActions } from "@/modules/shared/hooks";
 import { useTeachers } from "@/modules/teachers/hooks";
 import { Row } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 
 type Props = {
-  row: Row<Teacher>;
+  row: Row<ITeacher>;
 };
 
 export const ActionsColumn = ({ row }: Props) => {
@@ -23,7 +23,7 @@ export const ActionsColumn = ({ row }: Props) => {
     PrivateRoutes.TEACHER_CREATE,
     PrivateRoutes.TEACHER_DETAIL,
   );
-  const { isLoading, handleDelete } = useTeachers();
+  const { isLoading, handleDelete } = useTeachers(false);
 
   return (
     <DropdownMenu>

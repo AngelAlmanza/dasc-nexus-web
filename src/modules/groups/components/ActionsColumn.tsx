@@ -8,14 +8,14 @@ import {
   DropdownMenuTrigger,
 } from "@/core/components/ui";
 import { PrivateRoutes } from "@/core/enums";
-import { Group } from "@/data/models";
+import { IGroup } from "@/data/models";
 import { useGroups } from "@/modules/groups/hooks";
 import { useModuleActions } from "@/modules/shared/hooks";
 import { Row } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 
 type Props = {
-  row: Row<Group>;
+  row: Row<IGroup>;
 };
 
 export const ActionsColumn = ({ row }: Props) => {
@@ -23,7 +23,7 @@ export const ActionsColumn = ({ row }: Props) => {
     PrivateRoutes.GROUP_CREATE,
     PrivateRoutes.GROUP_DETAIL,
   );
-  const { isLoading, handleDelete } = useGroups();
+  const { isLoading, handleDelete } = useGroups(false);
 
   return (
     <DropdownMenu>

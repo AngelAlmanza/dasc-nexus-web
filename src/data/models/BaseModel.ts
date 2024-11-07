@@ -23,3 +23,9 @@ export abstract class BaseModel {
 
   public abstract toJSON(): object;
 }
+
+export interface IBaseModel {
+  id: number;
+  createdAt: Date | string;
+  updatedAt: Date | string;
+}

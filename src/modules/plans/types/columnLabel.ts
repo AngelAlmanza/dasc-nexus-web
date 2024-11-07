@@ -1,4 +1,4 @@
-import { Plan } from "@/data/models";
+import { IPlan } from "@/data/models";
 
-export type KeysPlanColumns = Exclude<keyof Plan, "toJSON">;
+export type KeysPlanColumns = keyof IPlan;
 export type ColumnLabel = Record<KeysPlanColumns, string>;

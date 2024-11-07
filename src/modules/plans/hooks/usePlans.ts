@@ -4,7 +4,7 @@ import { setPlanMessage } from "@/core/store/slices";
 import { deletePlan, getPlans } from "@/core/store/thunks";
 import { useEffect } from "react";
 
-export const usePlans = () => {
+export const usePlans = (requestPlans = true) => {
   const dispatch = useAppDispatch();
   const { plans, planMessage, isLoading } = useAppSelector(
     (state) => state.plan,
@@ -16,8 +16,9 @@ export const usePlans = () => {
   };
 
   useEffect(() => {
+    if (!requestPlans) return;
     dispatch(getPlans());
-  }, [dispatch]);
+  }, [dispatch, requestPlans]);
 
   useEffect(() => {
     if (planMessage && planMessage.length > 0) {

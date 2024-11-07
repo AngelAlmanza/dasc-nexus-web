@@ -5,12 +5,12 @@ import {
   getPlans,
   updatePlan,
 } from "@/core/store/thunks";
-import { Plan } from "@/data/models";
+import { IPlan } from "@/data/models";
 import { createSlice } from "@reduxjs/toolkit";
 
 interface PlanState {
-  plans: Plan[];
-  selectedPlan?: Plan;
+  plans: IPlan[];
+  selectedPlan?: IPlan;
   isLoading: boolean;
   planMessage: string;
 }

@@ -7,6 +7,4 @@ export interface SubjectDto {
   theory_hours: number;
   practice_hours: number;
   total_hours: number;
-  id_plan: number;
-  id_career: number;
 }

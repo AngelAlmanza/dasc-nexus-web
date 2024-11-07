@@ -1,79 +1,48 @@
-import { BaseModel } from "@/data/models";
+import { IResponse } from "@/data/interfaces";
+import { IBaseModel } from "@/data/models";
 
-export class Teacher extends BaseModel {
-  public constructor(
-    id: number,
-    createdAt: Date,
-    updatedAt: Date,
-    private _name: string,
-    private _lastname: string,
-    private _birthday: Date,
-    private _address: string,
-    private _phone: string,
-    private _email: string,
-  ) {
-    super(id, createdAt, updatedAt);
-  }
+export interface ITeacher extends IBaseModel {
+  name: string;
+  lastname: string;
+  birthday: Date;
+  address: string;
+  phone: string;
+  email: string;
+}
 
-  public get name(): string {
-    return this._name;
-  }
+export interface TeacherResponseData {
+  id: number;
+  created_at: Date;
+  updated_at: Date;
+  name: string;
+  lastname: string;
+  birthday: Date;
+  email: string;
+  phone: string;
+  address: string;
+  deleted_at: null;
+}
 
-  public set name(value: string) {
-    this._name = value;
-  }
+export interface GetTeachersResponse extends IResponse<TeacherResponseData[]> {
+  data: TeacherResponseData[];
+  message: string;
+  status: number;
+}
 
-  public get lastname(): string {
-    return this._lastname;
-  }
+export interface GetTeacherResponse extends IResponse<TeacherResponseData> {
+  data: TeacherResponseData;
+  message: string;
+  status: number;
+}
 
-  public set lastname(value: string) {
-    this._lastname = value;
-  }
+export interface CreateTeacherResponse extends IResponse<TeacherResponseData> {
+  data: TeacherResponseData;
+  message: string;
+  status: number;
+}
 
-  public get birthday(): Date {
-    return this._birthday;
-  }
-
-  public set birthday(value: Date) {
-    this._birthday = value;
-  }
-
-  public get address(): string {
-    return this._address;
-  }
-
-  public set address(value: string) {
-    this._address = value;
-  }
-
-  public get phone(): string {
-    return this._phone;
-  }
-
-  public set phone(value: string) {
-    this._phone = value;
-  }
-
-  public get email(): string {
-    return this._email;
-  }
-
-  public set email(value: string) {
-    this._email = value;
-  }
-
-  public toJSON(): object {
-    return {
-      id: this.id,
-      createdAt: this.createdAt,
-      updatedAt: this.updatedAt,
-      name: this._name,
-      lastname: this._lastname,
-      birthday: this._birthday,
-      address: this._address,
-      phone: this._phone,
-      email: this._email,
-    };
-  }
+export interface UpdateTeacherResponse extends IResponse<TeacherResponseData> {
+  data: TeacherResponseData;
+  message: string;
+  status: number;
 }

@@ -1,33 +1,63 @@
-import { CareerDto } from "@/data/dto";
-import { IRepository, IResponse } from "@/data/interfaces";
-import { Career } from "@/data/models";
 import { ApiAxiosInstance } from "@/core/lib/axios";
+import { CareerDto } from "@/data/dto";
+import { IRepository } from "@/data/interfaces";
+import {
+  CreateCareerResponse,
+  GetCareerResponse,
+  GetCareersResponse,
+  ICareer,
+  UpdateCareerResponse,
+} from "@/data/models";
 
 const api = ApiAxiosInstance.getInstance();
 const apiCareer = "/careers";
 
-export class CareerRepository implements IRepository<Career, CareerDto> {
-  async getAll(): Promise<Career[]> {
-    const response = await api.get<IResponse<Career[]>>(apiCareer);
-    return response.data.data;
+export class CareerRepository implements IRepository<ICareer, CareerDto> {
+  async getAll(): Promise<ICareer[]> {
+    const response = await api.get<GetCareersResponse>(apiCareer);
+    const careers = response.data.data;
+    return careers.map((career) => ({
+      id: career.id,
+      createdAt: career.created_at,
+      updatedAt: career.updated_at,
+      name: career.name,
+    }));
   }
 
-  async getById(id: number): Promise<Career> {
-    const response = await api.get<IResponse<Career>>(`${apiCareer}/${id}`);
-    return response.data.data;
+  async getById(id: number): Promise<ICareer> {
+    const response = await api.get<GetCareerResponse>(`${apiCareer}/${id}`);
+    const career = response.data.data;
+    return {
+      id: career.id,
+      createdAt: career.created_at,
+      updatedAt: career.updated_at,
+      name: career.name,
+    };
   }
 
-  async create(data: CareerDto): Promise<Career> {
-    const response = await api.post<IResponse<Career>>(apiCareer, data);
-    return response.data.data;
+  async create(data: CareerDto): Promise<ICareer> {
+    const response = await api.post<CreateCareerResponse>(apiCareer, data);
+    const career = response.data.data;
+    return {
+      id: career.id,
+      createdAt: career.created_at,
+      updatedAt: career.updated_at,
+      name: career.name,
+    };
   }
 
-  async update(id: number, data: CareerDto): Promise<Career> {
-    const response = await api.put<IResponse<Career>>(
+  async update(id: number, data: CareerDto): Promise<ICareer> {
+    const response = await api.put<UpdateCareerResponse>(
       `${apiCareer}/${id}`,
       data,
     );
-    return response.data.data;
+    const career = response.data.data;
+    return {
+      id: career.id,
+      createdAt: career.created_at,
+      updatedAt: career.updated_at,
+      name: career.name,
+    };
   }
 
   async delete(id: number): Promise<boolean> {

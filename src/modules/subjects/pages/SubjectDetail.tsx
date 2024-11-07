@@ -5,6 +5,7 @@ import {
   CardContent,
   CardFooter,
   CardHeader,
+  Checkbox,
   Form,
   FormControl,
   FormField,
@@ -12,12 +13,6 @@ import {
   FormLabel,
   FormMessage,
   Input,
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
 } from "@/core/components/ui";
 import { DashboardLayout } from "@/core/layouts";
 import { convertToNumber } from "@/modules/shared/utils";
@@ -25,17 +20,8 @@ import { BreadcrumbForm } from "@/modules/subjects/components";
 import { useSubjectDetails } from "@/modules/subjects/hooks";
 
 const SubjectDetails = () => {
-  const {
-    id,
-    title,
-    formType,
-    form,
-    isLoading,
-    majors,
-    plans,
-    onCancel,
-    onSubmit,
-  } = useSubjectDetails();
+  const { id, title, formType, form, isLoading, onCancel, onSubmit } =
+    useSubjectDetails();
 
   return (
     <DashboardLayout
@@ -111,6 +97,7 @@ const SubjectDetails = () => {
                           const numberValue = convertToNumber(e);
                           field.onChange({ target: { value: numberValue } });
                         }}
+                        max={10}
                       />
                     </FormControl>
                     <FormMessage />
@@ -179,64 +166,18 @@ const SubjectDetails = () => {
               />
               <FormField
                 control={form.control}
-                name="major"
+                name="online"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Carrera</FormLabel>
                     <FormControl>
-                      <Select
-                        onValueChange={field.onChange}
-                        value={field.value}
-                      >
-                        <SelectTrigger>
-                          <SelectValue placeholder="Selecciona una carrera" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectGroup>
-                            {majors.map((major) => (
-                              <SelectItem
-                                key={major.id}
-                                value={major.id.toString()}
-                              >
-                                {major.name}
-                              </SelectItem>
-                            ))}
-                          </SelectGroup>
-                        </SelectContent>
-                      </Select>
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={(value) => {
+                          field.onChange({ target: { value } });
+                        }}
+                      />
                     </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="plan"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Plan</FormLabel>
-                    <FormControl>
-                      <Select
-                        onValueChange={field.onChange}
-                        value={field.value}
-                      >
-                        <SelectTrigger>
-                          <SelectValue placeholder="Selecciona un plan" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectGroup>
-                            {plans.map((plan) => (
-                              <SelectItem
-                                key={plan.id}
-                                value={plan.id.toString()}
-                              >
-                                {plan.name}
-                              </SelectItem>
-                            ))}
-                          </SelectGroup>
-                        </SelectContent>
-                      </Select>
-                    </FormControl>
+                    <FormLabel className="ml-2">En Línea</FormLabel>
                     <FormMessage />
                   </FormItem>
                 )}

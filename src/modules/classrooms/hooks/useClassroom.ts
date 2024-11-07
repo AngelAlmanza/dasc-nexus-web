@@ -4,7 +4,7 @@ import { setClassroomMessage } from "@/core/store/slices";
 import { deleteClassroom, getClassrooms } from "@/core/store/thunks";
 import { useEffect } from "react";
 
-export const useClassroom = () => {
+export const useClassroom = (requestClassrooms = true) => {
   const dispatch = useAppDispatch();
   const { classrooms, classroomMessage, isLoading } = useAppSelector(
     (state) => state.classroom,
@@ -16,8 +16,9 @@ export const useClassroom = () => {
   };
 
   useEffect(() => {
+    if (!requestClassrooms) return;
     dispatch(getClassrooms());
-  }, [dispatch]);
+  }, [dispatch, requestClassrooms]);
 
   useEffect(() => {
     if (classroomMessage && classroomMessage.length > 0) {

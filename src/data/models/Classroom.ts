@@ -1,69 +1,52 @@
-import { BaseModel } from "@/data/models";
+import { RoomTypes } from "@/core/enums";
+import { IResponse } from "@/data/interfaces";
+import { IBaseModel } from "@/data/models";
 
-export class Classroom extends BaseModel {
-  public constructor(
-    id: number,
-    createdAt: Date,
-    updatedAt: Date,
-    private _name: string,
-    private _building: number,
-    private _floor: number,
-    private _long_desc: string,
-    private _capacity: number,
-  ) {
-    super(id, createdAt, updatedAt);
-  }
+export interface IClassroom extends IBaseModel {
+  name: string;
+  long_desc: string;
+  capacity: number;
+  floor: number;
+  building: number;
+  type: RoomTypes;
+}
 
-  public get name(): string {
-    return this._name;
-  }
+export interface ClassroomResponseData {
+  id: number;
+  created_at: Date;
+  updated_at: Date;
+  name: string;
+  long_desc: string;
+  capacity: number;
+  floor: number;
+  building: number;
+  type: RoomTypes;
+  deleted_at: null;
+}
 
-  public set name(value: string) {
-    this._name = value;
-  }
+export interface GetClassroomsResponse
+  extends IResponse<ClassroomResponseData[]> {
+  data: ClassroomResponseData[];
+  message: string;
+  status: number;
+}
 
-  public get building(): number {
-    return this._building;
-  }
+export interface GetClassroomResponse extends IResponse<ClassroomResponseData> {
+  data: ClassroomResponseData;
+  message: string;
+  status: number;
+}
 
-  public set building(value: number) {
-    this._building = value;
-  }
+export interface CreateClassroomResponse
+  extends IResponse<ClassroomResponseData> {
+  data: ClassroomResponseData;
+  message: string;
+  status: number;
+}
 
-  public get floor(): number {
-    return this._floor;
-  }
-
-  public set floor(value: number) {
-    this._floor = value;
-  }
-
-  public get long_desc(): string {
-    return this.long_desc;
-  }
-
-  public set long_desc(value: string) {
-    this.long_desc = value;
-  }
-
-  public get capacity(): number {
-    return this._capacity;
-  }
-
-  public set capacity(value: number) {
-    this._capacity = value;
-  }
-
-  public toJSON(): object {
-    return {
-      id: this.id,
-      createdAt: this.createdAt,
-      updatedAt: this.updatedAt,
-      name: this._name,
-      building: this._building,
-      floor: this._floor,
-      long_desc: this._long_desc,
-      capacity: this._capacity,
-    };
-  }
+export interface UpdateClassroomResponse
+  extends IResponse<ClassroomResponseData> {
+  data: ClassroomResponseData;
+  message: string;
+  status: number;
 }

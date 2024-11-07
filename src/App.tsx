@@ -47,10 +47,10 @@ const RequestDetail = lazy(
 );
 
 // Building Module
-const Building = lazy(() => import("@/modules/buildings/pages/Building"));
-const BuildingDetail = lazy(
-  () => import("@/modules/buildings/pages/BuildingDetail"),
-);
+// const Building = lazy(() => import("@/modules/buildings/pages/Building"));
+// const BuildingDetail = lazy(
+//   () => import("@/modules/buildings/pages/BuildingDetail"),
+// );
 
 // Plan Module
 const Plan = lazy(() => import("@/modules/plans/pages/Plan"));
@@ -158,7 +158,7 @@ function App() {
                 element={<RequestDetail />}
               />
 
-              <Route
+              {/* <Route
                 path={PrivateRoutes.BUILDING}
                 element={<Building />}
               />
@@ -169,7 +169,7 @@ function App() {
               <Route
                 path={`${PrivateRoutes.BUILDING_DETAIL}/:id`}
                 element={<BuildingDetail />}
-              />
+              /> */}
 
               <Route
                 path={PrivateRoutes.PLAN}

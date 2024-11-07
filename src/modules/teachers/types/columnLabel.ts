@@ -1,4 +1,4 @@
-import { Teacher } from "@/data/models";
+import { ITeacher } from "@/data/models";
 
-export type KeyTeacherColumns = Exclude<keyof Teacher, "toJSON">;
+export type KeyTeacherColumns = keyof ITeacher;
 export type ColumnLabel = Record<KeyTeacherColumns, string>;

@@ -8,14 +8,14 @@ import {
   DropdownMenuTrigger,
 } from "@/core/components/ui";
 import { PrivateRoutes } from "@/core/enums";
-import { Career } from "@/data/models";
+import { ICareer } from "@/data/models";
 import { useMajors } from "@/modules/majors/hooks";
 import { useModuleActions } from "@/modules/shared/hooks";
 import { Row } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 
 type Props = {
-  row: Row<Career>;
+  row: Row<ICareer>;
 };
 
 export const ActionsColumn = ({ row }: Props) => {
@@ -23,7 +23,7 @@ export const ActionsColumn = ({ row }: Props) => {
     PrivateRoutes.MAJOR_CREATE,
     PrivateRoutes.MAJOR_DETAIL,
   );
-  const { isLoading, handleDelete } = useMajors();
+  const { isLoading, handleDelete } = useMajors(false);
 
   return (
     <DropdownMenu>

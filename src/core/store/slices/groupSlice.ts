@@ -5,12 +5,12 @@ import {
   getGroups,
   updateGroup,
 } from "@/core/store/thunks";
-import { Group } from "@/data/models";
+import { IGroup } from "@/data/models";
 import { createSlice } from "@reduxjs/toolkit";
 
 interface GroupState {
-  groups: Group[];
-  selectedGroup?: Group;
+  groups: IGroup[];
+  selectedGroup?: IGroup;
   isLoading: boolean;
   groupMessage: string;
 }

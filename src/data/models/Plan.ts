@@ -1,59 +1,41 @@
-import { BaseModel, Career } from "@/data/models";
+import { IResponse } from "@/data/interfaces";
+import { IBaseModel, ICareer } from "@/data/models";
 
-export class Plan extends BaseModel {
-  public constructor(
-    id: number,
-    createdAt: Date,
-    updatedAt: Date,
-    private _name: string,
-    private _start: Date,
-    private _end: Date,
-    private _career: Career,
-  ) {
-    super(id, createdAt, updatedAt);
-  }
+export interface IPlan extends IBaseModel {
+  name: string;
+  start: string | Date;
+  end: string | Date;
+  career: ICareer;
+}
 
-  public get name(): string {
-    return this._name;
-  }
+export interface PlanResponseData {
+  id: number;
+  career: ICareer;
+  name: string;
+  init: Date | string;
+  end: Date | string;
+}
 
-  public set name(value: string) {
-    this._name = value;
-  }
+export interface GetPlansResponse extends IResponse<PlanResponseData[]> {
+  data: PlanResponseData[];
+  message: string;
+  status: number;
+}
 
-  public get start(): Date {
-    return this._start;
-  }
+export interface GetPlanResponse extends IResponse<PlanResponseData> {
+  data: PlanResponseData;
+  message: string;
+  status: number;
+}
 
-  public set start(value: Date) {
-    this._start = value;
-  }
+export interface CreatePlanResponse extends IResponse<PlanResponseData> {
+  data: PlanResponseData;
+  message: string;
+  status: number;
+}
 
-  public get end(): Date {
-    return this._end;
-  }
-
-  public set end(value: Date) {
-    this._end = value;
-  }
-
-  public get career(): Career {
-    return this.career;
-  }
-
-  public set career(value: Career) {
-    this.career = value;
-  }
-
-  public toJSON(): object {
-    return {
-      id: this.id,
-      createdAt: this.createdAt,
-      updatedAt: this.updatedAt,
-      name: this._name,
-      start: this._start,
-      end: this._end,
-      career: this._career.toJSON(),
-    };
-  }
+export interface UpdatePlanResponse extends IResponse<PlanResponseData> {
+  data: PlanResponseData;
+  message: string;
+  status: number;
 }

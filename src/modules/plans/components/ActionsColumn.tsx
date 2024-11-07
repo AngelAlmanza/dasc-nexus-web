@@ -8,14 +8,14 @@ import {
   DropdownMenuTrigger,
 } from "@/core/components/ui";
 import { PrivateRoutes } from "@/core/enums";
-import { Plan } from "@/data/models";
+import { IPlan } from "@/data/models";
 import { usePlans } from "@/modules/plans/hooks";
 import { useModuleActions } from "@/modules/shared/hooks";
 import { Row } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 
 type Props = {
-  row: Row<Plan>;
+  row: Row<IPlan>;
 };
 
 export const ActionsColumn = ({ row }: Props) => {
@@ -23,7 +23,7 @@ export const ActionsColumn = ({ row }: Props) => {
     PrivateRoutes.PLAN_CREATE,
     PrivateRoutes.PLAN_DETAIL,
   );
-  const { isLoading, handleDelete } = usePlans();
+  const { isLoading, handleDelete } = usePlans(false);
 
   return (
     <DropdownMenu>

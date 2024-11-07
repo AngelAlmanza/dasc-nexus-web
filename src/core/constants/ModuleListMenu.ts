@@ -3,7 +3,7 @@ import { IAsideLinks } from "@/core/interfaces";
 import {
   BookMinus,
   BookUser,
-  Building,
+  // Building,
   ChartNoAxesGantt,
   GraduationCap,
   Group,
@@ -56,12 +56,12 @@ export const ModuleListMenu: IAsideLinks[] = [
     variant: "default",
     to: PrivateRoutes.REQUEST,
   },
-  {
-    title: "Edificios",
-    icon: Building,
-    variant: "default",
-    to: PrivateRoutes.BUILDING,
-  },
+  // {
+  //   title: "Edificios",
+  //   icon: Building,
+  //   variant: "default",
+  //   to: PrivateRoutes.BUILDING,
+  // },
   {
     title: "Planes de Estudio",
     icon: ChartNoAxesGantt,

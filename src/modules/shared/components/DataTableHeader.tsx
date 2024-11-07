@@ -6,11 +6,11 @@ import {
   DropdownMenuTrigger,
   Input,
 } from "@/core/components/ui";
-import { BaseModel } from "@/data/models";
+import { IBaseModel } from "@/data/models";
 import { Table } from "@tanstack/react-table";
 import { ChevronDown } from "lucide-react";
 
-type Props<K extends BaseModel, U> = {
+type Props<K extends IBaseModel, U> = {
   table: Table<K>;
   searchInputColumnName: string;
   searchInputColumnPlaceholder: string;
@@ -19,7 +19,7 @@ type Props<K extends BaseModel, U> = {
   handleNavigation: () => void;
 };
 
-export const DataTableHeader = <K extends BaseModel, U>({
+export const DataTableHeader = <K extends IBaseModel, U>({
   table,
   searchInputColumnName,
   searchInputColumnPlaceholder,

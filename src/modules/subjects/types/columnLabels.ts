@@ -1,4 +1,4 @@
-import { Subject } from "@/data/models";
+import { ISubject } from "@/data/models";
 
-export type KeysSubjectColumns = Exclude<keyof Subject, "toJSON">;
+export type KeysSubjectColumns = keyof ISubject;
 export type ColumnLabel = Record<KeysSubjectColumns, string>;

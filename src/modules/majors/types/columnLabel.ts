@@ -1,4 +1,4 @@
-import { Career } from "@/data/models";
+import { ICareer } from "@/data/models";
 
-export type KeysMajorColumns = Exclude<keyof Career, "toJSON">;
+export type KeysMajorColumns = keyof ICareer;
 export type ColumnLabel = Record<KeysMajorColumns, string>;

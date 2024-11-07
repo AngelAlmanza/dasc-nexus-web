@@ -4,7 +4,7 @@ import { setMajorMessage } from "@/core/store/slices";
 import { deleteMajor, getMajors } from "@/core/store/thunks";
 import { useEffect } from "react";
 
-export const useMajors = () => {
+export const useMajors = (requestMajors = true) => {
   const dispatch = useAppDispatch();
   const { majors, majorMessage, isLoading } = useAppSelector(
     (state) => state.major,
@@ -16,8 +16,10 @@ export const useMajors = () => {
   };
 
   useEffect(() => {
-    dispatch(getMajors());
-  }, [dispatch]);
+    if (requestMajors) {
+      dispatch(getMajors());
+    }
+  }, [dispatch, requestMajors]);
 
   useEffect(() => {
     if (majorMessage && majorMessage.length > 0) {

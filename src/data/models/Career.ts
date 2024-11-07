@@ -1,29 +1,38 @@
-import { BaseModel } from "@/data/models";
+import { IResponse } from "@/data/interfaces";
+import { IBaseModel } from "@/data/models";
 
-export class Career extends BaseModel {
-  public constructor(
-    id: number,
-    createdAt: Date,
-    updatedAt: Date,
-    private _name: string,
-  ) {
-    super(id, createdAt, updatedAt);
-  }
+export interface ICareer extends IBaseModel {
+  name: string;
+}
 
-  public get name(): string {
-    return this._name;
-  }
+export interface CareerResponseData {
+  id: number;
+  created_at: Date;
+  updated_at: Date;
+  name: string;
+  deleted_at: null;
+}
 
-  public set name(value: string) {
-    this._name = value;
-  }
+export interface GetCareersResponse extends IResponse<CareerResponseData[]> {
+  data: CareerResponseData[];
+  status: number;
+  message: string;
+}
 
-  public toJSON(): object {
-    return {
-      id: this.id,
-      createdAt: this.createdAt,
-      updatedAt: this.updatedAt,
-      name: this._name,
-    };
-  }
+export interface GetCareerResponse extends IResponse<CareerResponseData> {
+  data: CareerResponseData;
+  status: number;
+  message: string;
+}
+
+export interface CreateCareerResponse extends IResponse<CareerResponseData> {
+  data: CareerResponseData;
+  status: number;
+  message: string;
+}
+
+export interface UpdateCareerResponse extends IResponse<CareerResponseData> {
+  data: CareerResponseData;
+  status: number;
+  message: string;
 }

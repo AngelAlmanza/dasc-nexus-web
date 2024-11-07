@@ -1,4 +1,4 @@
-import { Classroom } from "@/data/models";
+import { IClassroom } from "@/data/models";
 import { createSlice } from "@reduxjs/toolkit";
 import {
   getClassrooms,
@@ -9,8 +9,8 @@ import {
 } from "@/core/store/thunks";
 
 interface ClassroomState {
-  classrooms: Classroom[];
-  selectedClassroom?: Classroom;
+  classrooms: IClassroom[];
+  selectedClassroom?: IClassroom;
   isLoading: boolean;
   classroomMessage: string;
 }
@@ -99,6 +99,15 @@ export const ClassroomSlice = createSlice({
     });
     builder.addCase(getClassroomById.pending, (state) => {
       state.isLoading = true;
+    });
+    builder.addCase(getClassroomById.fulfilled, (state, action) => {
+      state.selectedClassroom = action.payload;
+      state.isLoading = false;
+    });
+    builder.addCase(getClassroomById.rejected, (state) => {
+      state.isLoading = false;
+      state.classroomMessage =
+        "Ha ocurrido un error al obtener el salón de clase";
     });
   },
 });

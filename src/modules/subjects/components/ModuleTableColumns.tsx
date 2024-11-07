@@ -1,9 +1,9 @@
 import { Checkbox } from "@/core/components/ui";
-import { Subject } from "@/data/models";
+import { ISubject } from "@/data/models";
 import { ActionsColumn } from "@/modules/subjects/components";
 import { ColumnDef } from "@tanstack/react-table";
 
-export const ModuleTableColumns: ColumnDef<Subject>[] = [
+export const ModuleTableColumns: ColumnDef<ISubject>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -31,11 +31,6 @@ export const ModuleTableColumns: ColumnDef<Subject>[] = [
     header: "Nombre",
     cell: ({ row }) => <div className="capitalize">{row.getValue("name")}</div>,
   },
-  // {
-  //   accessorKey: "career",
-  //   header: "Carrera",
-  //   cell: ({ row }) => <div>{(row.getValue("career") as Career).name}</div>,
-  // },
   {
     accessorKey: "practice_hours",
     header: "Horas de práctica",

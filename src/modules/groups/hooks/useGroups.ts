@@ -4,7 +4,7 @@ import { setGroupMessage } from "@/core/store/slices";
 import { deleteGroup, getGroups } from "@/core/store/thunks";
 import { useEffect } from "react";
 
-export const useGroups = () => {
+export const useGroups = (requestGroups = true) => {
   const dispatch = useAppDispatch();
   const { groups, groupMessage, isLoading } = useAppSelector(
     (state) => state.group,
@@ -16,8 +16,9 @@ export const useGroups = () => {
   };
 
   useEffect(() => {
+    if (!requestGroups) return;
     dispatch(getGroups());
-  }, [dispatch]);
+  }, [dispatch, requestGroups]);
 
   useEffect(() => {
     if (groupMessage && groupMessage.length > 0) {

@@ -23,6 +23,7 @@ import { RoomTypes } from "@/core/enums";
 import { DashboardLayout } from "@/core/layouts";
 import { BreadcrumbForm } from "@/modules/classrooms/components";
 import { useClassroomDetails } from "@/modules/classrooms/hooks";
+import { convertToNumber } from "@/modules/shared/utils";
 import { SelectGroup } from "@radix-ui/react-select";
 
 const ClassroomDetails = () => {
@@ -78,7 +79,7 @@ const ClassroomDetails = () => {
                   <FormItem>
                     <FormLabel>Edificio</FormLabel>
                     <Select
-                      onValueChange={(value) => field.onChange(Number(value))}
+                      onValueChange={field.onChange}
                       value={field.value?.toString()}
                     >
                       <SelectTrigger className="hover:bg-accent hover:text-accent-foreground">
@@ -86,9 +87,8 @@ const ClassroomDetails = () => {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
-                          <SelectItem value="1">Edificio A</SelectItem>
-                          <SelectItem value="2">Edificio B</SelectItem>
-                          <SelectItem value="3">Edificio C</SelectItem>
+                          <SelectItem value="1">Edificio 1</SelectItem>
+                          <SelectItem value="2">Edificio 2</SelectItem>
                         </SelectGroup>
                       </SelectContent>
                     </Select>
@@ -108,6 +108,8 @@ const ClassroomDetails = () => {
                         placeholder="Piso"
                         className="hover:bg-accent hover:text-accent-foreground"
                         {...field}
+                        max={2}
+                        min={1}
                       />
                     </FormControl>
                     <FormMessage />
@@ -126,6 +128,10 @@ const ClassroomDetails = () => {
                         placeholder="Capacidad"
                         className="hover:bg-accent hover:text-accent-foreground"
                         {...field}
+                        onChange={(e) => {
+                          const numberValue = convertToNumber(e);
+                          field.onChange({ target: { value: numberValue } });
+                        }}
                       />
                     </FormControl>
                     <FormMessage />

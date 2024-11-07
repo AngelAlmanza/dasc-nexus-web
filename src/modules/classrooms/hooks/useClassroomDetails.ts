@@ -17,16 +17,8 @@ import { z } from "zod";
 
 const formSchema = z.object({
   name: z.string().min(6, "El nombre debe tener al menos 6 carácteres"),
-  building: z
-    .number()
-    .int()
-    .min(1, "El edificio debe ser mayor a 0")
-    .max(3, "El edificio debe ser menor a 4"),
-  floor: z
-    .number()
-    .int()
-    .min(1, "El piso debe ser mayor a 0")
-    .max(2, "El piso debe ser menor a 3"),
+  building: z.string({ required_error: "Edificio requerido" }),
+  floor: z.string({ required_error: "Piso requerido" }),
   description: z
     .string()
     .min(6, "La descripción debe tener al menos 6 carácteres"),
@@ -57,7 +49,7 @@ export const useClassroomDetails = () => {
     defaultValues: {
       name: "",
       building: undefined,
-      floor: 1,
+      floor: "",
       description: "",
       capacity: 15,
     },
@@ -67,7 +59,7 @@ export const useClassroomDetails = () => {
     const classroomDto: ClassroomDto = {
       name: data.name,
       building: Number(data.building),
-      floor: data.floor,
+      floor: Number(data.floor),
       long_desc: data.description,
       capacity: data.capacity,
       type: data.roomType,
@@ -97,9 +89,11 @@ export const useClassroomDetails = () => {
     if (selectedClassroom) {
       form.reset({
         name: selectedClassroom.name,
-        building: selectedClassroom.building,
-        floor: selectedClassroom.floor,
+        building: selectedClassroom.building.toString(),
+        floor: selectedClassroom.floor.toString(),
         description: selectedClassroom.long_desc,
+        capacity: selectedClassroom.capacity,
+        roomType: selectedClassroom.type,
       });
     }
   }, [selectedClassroom, form]);

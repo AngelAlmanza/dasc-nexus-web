@@ -6,15 +6,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/core/components/ui";
-import { BaseModel } from "@/data/models";
+import { IBaseModel } from "@/data/models";
 import { flexRender, Table as TableType } from "@tanstack/react-table";
 
-type Props<K extends BaseModel> = {
+type Props<K extends IBaseModel> = {
   table: TableType<K>;
   columnsLength: number;
 };
 
-export const DataTableContent = <K extends BaseModel>({
+export const DataTableContent = <K extends IBaseModel>({
   table,
   columnsLength,
 }: Props<K>) => {
