@@ -32,4 +32,10 @@ export enum PrivateRoutes {
   GROUP = "/group",
   GROUP_DETAIL = "/group/detail",
   GROUP_CREATE = "/group/create",
+  TERM = "/term",
+  TERM_DETAIL = "/term/detail",
+  TERM_CREATE = "/term/create",
+  TEACHER_SCHEDULE = "/schedule-teacher",
+  TEACHER_SCHEDULE_DETAIL = "/schedule-teacher/detail",
+  TEACHER_SCHEDULE_CREATE = "/schedule-teacher/create",
 }
