@@ -7,6 +7,7 @@ export * from "./Plan";
 export * from "./RoomActive";
 export * from "./Schedule";
 export * from "./Subject";
+export * from "./Student";
 export * from "./Teacher";
 export * from "./TeacherSubject";
 export * from "./Term";

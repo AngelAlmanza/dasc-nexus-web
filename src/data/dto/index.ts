@@ -4,6 +4,7 @@ export * from "./GroupDto";
 export * from "./PlanDto";
 export * from "./RoomActiveDto";
 export * from "./ScheduleDto";
+export * from "./StudentDto";
 export * from "./SubjectDto";
 export * from "./TeacherDto";
 export * from "./TeacherSubjectDto";

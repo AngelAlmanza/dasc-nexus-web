@@ -1,20 +1,60 @@
 import { ModuleHeaderComponent } from "@/core/components";
-import { Button } from "@/core/components/ui";
 import { PrivateRoutes } from "@/core/enums";
 import { DashboardLayout } from "@/core/layouts";
-import { BreadcrumbModule } from "@/modules/students/components";
-import { useNavigate } from "react-router-dom";
+import {
+  DataTableContent,
+  DataTableHeader,
+  DataTablePagination,
+} from "@/modules/shared/components";
+import { useDataTable, useModuleActions } from "@/modules/shared/hooks";
+import { BreadcrumbModule} from "@/modules/students/components";
+import { ModuleTableColumns } from "../components/ModuleTableColumns";
+import { useStudents } from "../hooks";
+import { getColumnLabel } from "@/modules/students/utils";
+import {
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
 
 const Student = () => {
-  const navigate = useNavigate();
+  const { students } = useStudents();
 
-  const handleGoToDetails = (id?: number) => {
-    if (id) {
-      navigate(`${PrivateRoutes.STUDENT_DETAIL}/${id}`);
-    } else {
-      navigate(PrivateRoutes.STUDENT_CREATE);
-    }
-  };
+  const { handleNavigation } = useModuleActions(
+    PrivateRoutes.STUDENT_CREATE,
+    PrivateRoutes.STUDENT_DETAIL,
+  );
+  const {
+    sorting,
+    columnFilters,
+    columnVisibility,
+    rowSelection,
+    setSorting,
+    setColumnFilters,
+    setColumnVisibility,
+    setRowSelection,
+  } = useDataTable();
+
+  const table = useReactTable({
+    data: students,
+    columns: ModuleTableColumns,
+    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
+    state: {
+      sorting,
+      columnFilters,
+      columnVisibility,
+      rowSelection,
+    },
+  });
 
   return (
     <DashboardLayout
@@ -25,9 +65,19 @@ const Student = () => {
         />
       }
     >
-      <p>Alumnos</p>
-      <Button onClick={() => handleGoToDetails(23)}>Go to details</Button>
-      <Button onClick={() => handleGoToDetails()}>Go to create</Button>
+      <DataTableHeader
+        table={table}
+        searchInputColumnName="name"
+        searchInputColumnPlaceholder="Buscar por nombre"
+        createButtonLabel="Crear Alumno"
+        getColumnLabel={getColumnLabel}
+        handleNavigation={handleNavigation}
+      />
+      <DataTableContent
+        table={table}
+        columnsLength={ModuleTableColumns.length}
+      />
+      <DataTablePagination table={table} />
     </DashboardLayout>
   );
 };

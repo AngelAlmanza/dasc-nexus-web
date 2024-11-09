@@ -12,6 +12,7 @@ import {
   TermSlice,
   UISlice,
 } from "@/core/store/slices";
+import { StudentSlice } from "./slices/studentSlice";
 import { configureStore } from "@reduxjs/toolkit";
 
 export const store = configureStore({
@@ -25,6 +26,7 @@ export const store = configureStore({
     plan: PlanSlice.reducer,
     schedule: ScheduleSlice.reducer,
     subject: SubjectSlice.reducer,
+    student: StudentSlice.reducer,
     teacher: TeacherSlice.reducer,
     term: TermSlice.reducer,
     ui: UISlice.reducer,
