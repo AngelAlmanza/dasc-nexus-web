@@ -40,6 +40,14 @@ const TeacherDetail = lazy(
   () => import("@/modules/teachers/pages/TeacherDetail"),
 );
 
+// Teacher Schedule Module
+const TeacherSchedule = lazy(
+  () => import("@/modules/teacher-schedules/pages/TeacherSchedule"),
+);
+const TeacherScheduleDetail = lazy(
+  () => import("@/modules/teacher-schedules/pages/TeacherScheduleDetail"),
+);
+
 // Requests Module
 const Request = lazy(() => import("@/modules/requests/pages/Request"));
 const RequestDetail = lazy(
@@ -59,6 +67,10 @@ const PlanDetail = lazy(() => import("@/modules/plans/pages/PlanDetail"));
 // Group Module
 const Group = lazy(() => import("@/modules/groups/pages/Group"));
 const GroupDetail = lazy(() => import("@/modules/groups/pages/GroupDetail"));
+
+// Term Module
+const Term = lazy(() => import("@/modules/terms/pages/Term"));
+const TermDetail = lazy(() => import("@/modules/terms/pages/TermDetail"));
 
 function App() {
   return (
@@ -146,6 +158,19 @@ function App() {
               />
 
               <Route
+                path={PrivateRoutes.TEACHER_SCHEDULE}
+                element={<TeacherSchedule />}
+              />
+              <Route
+                path={PrivateRoutes.TEACHER_SCHEDULE_CREATE}
+                element={<TeacherScheduleDetail />}
+              />
+              <Route
+                path={`${PrivateRoutes.TEACHER_SCHEDULE_DETAIL}/:id`}
+                element={<TeacherScheduleDetail />}
+              />
+
+              <Route
                 path={PrivateRoutes.REQUEST}
                 element={<Request />}
               />
@@ -195,6 +220,19 @@ function App() {
               <Route
                 path={`${PrivateRoutes.GROUP_DETAIL}/:id`}
                 element={<GroupDetail />}
+              />
+
+              <Route
+                path={PrivateRoutes.TERM}
+                element={<Term />}
+              />
+              <Route
+                path={PrivateRoutes.TERM_CREATE}
+                element={<TermDetail />}
+              />
+              <Route
+                path={`${PrivateRoutes.TERM_DETAIL}/:id`}
+                element={<TermDetail />}
               />
             </Route>
           </RoutesWithNotFound>

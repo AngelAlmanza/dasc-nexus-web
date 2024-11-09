@@ -7,3 +7,13 @@ export enum Day {
   "Sábado",
   "Domingo",
 }
+
+export enum DayEn {
+  "monday",
+  "tuesday",
+  "wednesday",
+  "thursday",
+  "friday",
+  "saturday",
+  "sunday",
+}

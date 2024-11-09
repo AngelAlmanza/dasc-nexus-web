@@ -1,59 +1,42 @@
-import { BaseModel } from "@/data/models";
+import { IResponse } from "@/data/interfaces";
+import { IBaseModel } from "@/data/models";
 
-export class Term extends BaseModel {
-  public constructor(
-    id: number,
-    createdAt: Date,
-    updatedAt: Date,
-    private _start: Date,
-    private _end: Date,
-    private _active: boolean,
-    private _plan_end: Date,
-  ) {
-    super(id, createdAt, updatedAt);
-  }
+export interface ITerm extends IBaseModel {
+  init: Date;
+  end: Date;
+  active: number;
+}
 
-  public get init(): Date {
-    return this._start;
-  }
+export interface TermResponseData {
+  id: number;
+  created_at: Date;
+  updated_at: Date;
+  init: Date;
+  end: Date;
+  active: number;
+  deleted_at: null;
+}
 
-  public set init(value: Date) {
-    this._start = value;
-  }
+export interface GetTermsResponse extends IResponse<TermResponseData[]> {
+  data: TermResponseData[];
+  message: string;
+  status: number;
+}
 
-  public get end(): Date {
-    return this._end;
-  }
+export interface GetTermResponse extends IResponse<TermResponseData> {
+  data: TermResponseData;
+  message: string;
+  status: number;
+}
 
-  public set end(value: Date) {
-    this._end = value;
-  }
+export interface CreateTermResponse extends IResponse<TermResponseData> {
+  data: TermResponseData;
+  message: string;
+  status: number;
+}
 
-  public get active(): boolean {
-    return this._active;
-  }
-
-  public set active(value: boolean) {
-    this._active = value;
-  }
-
-  public get plan_end(): Date {
-    return this._plan_end;
-  }
-
-  public set plan_end(value: Date) {
-    this._plan_end = value;
-  }
-
-  public toJSON(): object {
-    return {
-      id: this.id,
-      createdAt: this.createdAt,
-      updatedAt: this.updatedAt,
-      start: this._start,
-      end: this._end,
-      active: this._active,
-      plan_end: this._plan_end,
-    };
-  }
+export interface UpdateTermResponse extends IResponse<TermResponseData> {
+  data: TermResponseData;
+  message: string;
+  status: number;
 }

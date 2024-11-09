@@ -1,3 +1,4 @@
+// TODO: Replace shift with enum
 export interface GroupDto {
   semester: number;
   shift: string;

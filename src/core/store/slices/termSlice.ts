@@ -5,12 +5,12 @@ import {
   getTerms,
   updateTerm,
 } from "@/core/store/thunks/termThunks";
-import { Term } from "@/data/models";
+import { ITerm } from "@/data/models";
 import { createSlice } from "@reduxjs/toolkit";
 
 interface TermState {
-  terms: Term[];
-  selectedTerm?: Term;
+  terms: ITerm[];
+  selectedTerm?: ITerm;
   isLoading: boolean;
   termMessage: string;
 }

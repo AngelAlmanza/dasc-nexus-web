@@ -3,6 +3,7 @@ import { IAsideLinks } from "@/core/interfaces";
 import {
   BookMinus,
   BookUser,
+  CalendarDays,
   // Building,
   ChartNoAxesGantt,
   GraduationCap,
@@ -10,6 +11,7 @@ import {
   LayoutDashboard,
   School,
   ScrollText,
+  TimerReset,
   Users,
 } from "lucide-react";
 
@@ -51,6 +53,12 @@ export const ModuleListMenu: IAsideLinks[] = [
     to: PrivateRoutes.TEACHER,
   },
   {
+    title: "Horarios",
+    icon: CalendarDays,
+    variant: "default",
+    to: PrivateRoutes.TEACHER_SCHEDULE,
+  },
+  {
     title: "Solicitudes",
     icon: ScrollText,
     variant: "default",
@@ -73,5 +81,11 @@ export const ModuleListMenu: IAsideLinks[] = [
     icon: Group,
     variant: "default",
     to: PrivateRoutes.GROUP,
+  },
+  {
+    title: "Periodos",
+    icon: TimerReset,
+    variant: "default",
+    to: PrivateRoutes.TERM,
   },
 ];
