@@ -28,7 +28,7 @@ export const store = configureStore({
     scheduleBlocks: ScheduleBlockSlice.reducer,
     teacherSchedule: TeacherScheduleSlice.reducer,
     subject: SubjectSlice.reducer,
-    studen: StudentSlice.reducer,
+    student: StudentSlice.reducer,
     teacher: TeacherSlice.reducer,
     term: TermSlice.reducer,
     ui: UISlice.reducer,
