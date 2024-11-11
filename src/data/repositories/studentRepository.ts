@@ -19,7 +19,9 @@ export class StudentRepository implements IRepository<IStudent, StudentDto> {
     return students.map((student) => ({
       id: student.id,
       name: student.name,
-      surname: student.surname,
+      lastname: student.lastname,
+      email: student.email,
+      phone: student.phone,
       createdAt: student.created_at,
       updatedAt: student.updated_at,
     }));
@@ -31,7 +33,9 @@ export class StudentRepository implements IRepository<IStudent, StudentDto> {
     return {
         id: student.id,
         name: student.name,
-        surname: student.surname,
+        lastname: student.lastname,
+        email: student.email,
+        phone: student.phone,
         createdAt: student.created_at,
         updatedAt: student.updated_at,
     };
@@ -43,7 +47,9 @@ export class StudentRepository implements IRepository<IStudent, StudentDto> {
     return {
         id: student.id,
         name: student.name,
-        surname: student.surname,
+        lastname: student.lastname,
+        email: student.email,
+        phone: student.phone,
         createdAt: student.created_at,
         updatedAt: student.updated_at,
     };
@@ -58,7 +64,9 @@ export class StudentRepository implements IRepository<IStudent, StudentDto> {
     return {
         id: student.id,
         name: student.name,
-        surname: student.surname,
+        lastname: student.lastname,
+        email: student.email,
+        phone: student.phone,
         createdAt: student.created_at,
         updatedAt: student.updated_at,
     };
