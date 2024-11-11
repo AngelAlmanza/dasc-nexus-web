@@ -1,14 +1,8 @@
-import { PrivateRoutes } from "@/core/enums";
+import { PrivateRoutes, Shifts } from "@/core/enums";
 import { useToast } from "@/core/hooks";
 import { useAppDispatch, useAppSelector } from "@/core/store/hooks";
 import { setGroupMessage, setSelectedGroup } from "@/core/store/slices";
-import {
-  createGroup,
-  getGroupById,
-  getMajors,
-  getPlans,
-  updateGroup,
-} from "@/core/store/thunks";
+import { createGroup, getGroupById, updateGroup } from "@/core/store/thunks";
 import { FormTypes } from "@/core/types";
 import { GroupDto } from "@/data/dto";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -19,9 +13,10 @@ import { z } from "zod";
 
 const formShcema = z.object({
   semester: z.string().min(1, "El semestre es requerido"),
-  shift: z.string().min(1, "El turno es requerido"),
-  career_id: z.string().min(1, "La carrera es requerida"),
-  plan_id: z.string().min(1, "El plan es requerido"),
+  shift: z.nativeEnum(Shifts, {
+    message: "El turno seleccionado no existe",
+    required_error: "El turno es requerido",
+  }),
 });
 
 export const useGroupDetails = () => {
@@ -31,8 +26,6 @@ export const useGroupDetails = () => {
   const { isLoading, selectedGroup, groupMessage } = useAppSelector(
     (state) => state.group,
   );
-  const { majors } = useAppSelector((state) => state.major);
-  const { plans } = useAppSelector((state) => state.plan);
   const { toast } = useToast();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -41,9 +34,6 @@ export const useGroupDetails = () => {
     resolver: zodResolver(formShcema),
     defaultValues: {
       semester: "",
-      shift: "",
-      career_id: "",
-      plan_id: "",
     },
   });
 
@@ -51,8 +41,6 @@ export const useGroupDetails = () => {
     const groupDto: GroupDto = {
       semester: Number(data.semester),
       shift: data.shift,
-      career_id: Number(data.career_id),
-      plan_id: Number(data.plan_id),
     };
 
     if (formType === "update") {
@@ -79,9 +67,7 @@ export const useGroupDetails = () => {
     if (selectedGroup) {
       form.reset({
         semester: selectedGroup.semester.toString(),
-        shift: selectedGroup.shift.toString(),
-        career_id: selectedGroup.careerId.toString(),
-        plan_id: selectedGroup.planId.toString(),
+        shift: selectedGroup.shift,
       });
     }
   }, [selectedGroup, form]);
@@ -98,19 +84,12 @@ export const useGroupDetails = () => {
     }
   }, [groupMessage, dispatch, toast, navigate]);
 
-  useEffect(() => {
-    dispatch(getMajors());
-    dispatch(getPlans());
-  }, [dispatch]);
-
   return {
     id,
     formType,
     title,
     form,
     isLoading,
-    majors,
-    plans,
     onSubmit,
     onCancel,
   };

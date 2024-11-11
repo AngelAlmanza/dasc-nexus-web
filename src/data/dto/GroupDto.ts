@@ -1,7 +1,6 @@
-// TODO: Replace shift with enum
+import { Shifts } from "@/core/enums";
+
 export interface GroupDto {
   semester: number;
-  shift: string;
-  career_id: number;
-  plan_id: number;
+  shift: Shifts;
 }

@@ -22,19 +22,11 @@ import {
 import { DashboardLayout } from "@/core/layouts";
 import { BreadcrumbForm } from "@/modules/groups/components";
 import { useGroupDetails } from "@/modules/groups/hooks";
+import { Shifts } from "../../../core/enums/shifts";
 
 function GroupDetail() {
-  const {
-    id,
-    title,
-    formType,
-    form,
-    isLoading,
-    majors,
-    plans,
-    onCancel,
-    onSubmit,
-  } = useGroupDetails();
+  const { id, title, formType, form, isLoading, onCancel, onSubmit } =
+    useGroupDetails();
 
   return (
     <DashboardLayout
@@ -84,75 +76,25 @@ function GroupDetail() {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Turno</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="text"
-                        placeholder="Turno"
-                        className="hover:bg-accent hover:text-accent-foreground"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="career_id"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Carrera</FormLabel>
                     <Select
-                      onValueChange={(value) => field.onChange(value)}
-                      value={field.value?.toString()}
+                      onValueChange={(value) => field.onChange(value as Shifts)}
+                      value={field.value}
                     >
                       <SelectTrigger className="hover:bg-accent hover:text-accent-foreground">
-                        <SelectValue placeholder="Selecciona una carrera" />
+                        <SelectValue placeholder="Selecciona un turno" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
-                          {majors.map((major) => (
-                            <SelectItem
-                              key={major.id}
-                              value={major.id.toString()}
-                            >
-                              {major.name}
-                            </SelectItem>
-                          ))}
+                          <SelectItem value={Shifts.Morning}>
+                            Matutino
+                          </SelectItem>
+                          <SelectItem value={Shifts.Afternoon}>
+                            Vespertino
+                          </SelectItem>
+                          <SelectItem value={Shifts.Night}>Nocturno</SelectItem>
                         </SelectGroup>
                       </SelectContent>
                     </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="plan_id"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Plan</FormLabel>
-                    <Select
-                      onValueChange={(value) => field.onChange(value)}
-                      value={field.value?.toString()}
-                    >
-                      <SelectTrigger className="hover:bg-accent hover:text-accent-foreground">
-                        <SelectValue placeholder="Selecciona un plan" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectGroup>
-                          {plans.map((plan) => (
-                            <SelectItem
-                              key={plan.id}
-                              value={plan.id.toString()}
-                            >
-                              {plan.name}
-                            </SelectItem>
-                          ))}
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
