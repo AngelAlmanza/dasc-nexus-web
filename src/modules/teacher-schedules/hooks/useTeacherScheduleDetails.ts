@@ -98,9 +98,11 @@ export const useTeacherScheduleDetails = () => {
       Number(selectedTeacher),
       Number(selectedScheduleBlock),
       Number(selectedTerm),
+      selectedTeacherSchedule,
     );
     return values;
   }, [
+    selectedTeacherSchedule,
     selectedTeacher,
     selectedScheduleBlock,
     selectedTerm,

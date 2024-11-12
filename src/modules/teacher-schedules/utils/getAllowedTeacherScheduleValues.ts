@@ -17,11 +17,26 @@ export const getAllowedTeacherScheduleValues = (
   selectedTeacher: number,
   selectedScheduleBlock: number,
   selectedTerm: number,
+  currentSelectedTeacherSchedule?: ITeacherSchedule,
 ): {
   teachers: ITeacher[];
   scheduleBlocks: IScheduleBlock[];
   terms: ITerm[];
 } => {
+  if (
+    currentSelectedTeacherSchedule &&
+    currentSelectedTeacherSchedule.teacher.id === selectedTeacher &&
+    currentSelectedTeacherSchedule.schedule_block.id ===
+      selectedScheduleBlock &&
+    currentSelectedTeacherSchedule.term.id === selectedTerm
+  ) {
+    return {
+      teachers,
+      scheduleBlocks,
+      terms,
+    };
+  }
+
   const allowedTeachers = teachers.filter((teacher) => {
     if (!selectedScheduleBlock && !selectedTerm) return true;
     return !teacherSchedules.some(

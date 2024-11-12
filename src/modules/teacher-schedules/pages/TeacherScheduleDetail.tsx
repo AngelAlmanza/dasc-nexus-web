@@ -36,9 +36,6 @@ function TeacherScheduleDetail() {
     classrooms,
     subjects,
     allowedValues: { teachers, terms, scheduleBlocks },
-    // teachers,
-    // terms,
-    // scheduleBlocks,
   } = useTeacherScheduleDetails();
 
   return (

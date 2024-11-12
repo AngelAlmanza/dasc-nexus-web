@@ -146,26 +146,6 @@ const SubjectDetails = () => {
               />
               <FormField
                 control={form.control}
-                name="semester"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Semestre</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="number"
-                        {...field}
-                        onChange={(e) => {
-                          const numberValue = convertToNumber(e);
-                          field.onChange({ target: { value: numberValue } });
-                        }}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
                 name="online"
                 render={({ field }) => (
                   <FormItem>

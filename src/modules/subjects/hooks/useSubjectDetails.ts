@@ -30,10 +30,6 @@ const formSchema = z.object({
     .number({ message: "Las horas de práctica deben ser un número" })
     .int()
     .positive("Las horas de práctica deben ser un número positivo"),
-  semester: z
-    .number({ message: "El semestre debe ser un número" })
-    .int()
-    .positive("El semestre debe ser un número positivo"),
   online: z.boolean(),
 });
 
@@ -56,7 +52,6 @@ export const useSubjectDetails = () => {
       credits: 0,
       theory_hours: 0,
       practice_hours: 0,
-      semester: 0,
       online: false,
     },
   });
@@ -69,7 +64,6 @@ export const useSubjectDetails = () => {
       theory_hours: data.theory_hours,
       practice_hours: data.practice_hours,
       total_hours: data.theory_hours + data.practice_hours,
-      semester: data.semester,
       online: data.online,
     };
 
