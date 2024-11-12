@@ -41,7 +41,7 @@ const StudentDetails = () => {
         >
           <Card>
             <CardHeader>
-              <h2 className="text-xl font-semibold">Información del Maestro</h2>
+              <h2 className="text-xl font-semibold">Información del Alumno</h2>
             </CardHeader>
             <CardContent className="grid grid-cols-2 gap-4">
               <FormField

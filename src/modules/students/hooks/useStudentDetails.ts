@@ -72,7 +72,7 @@ export const useStudentDetails = () => {
   useEffect(() => {
     if (id) {
       dispatch(getStudentById(Number(id)));
-      setTitle(`Informacion del Maestro ${id}`);
+      setTitle(`Informacion del Alumno ${id}`);
       setFormType("update");
     }
   }, [id, dispatch]);
@@ -96,7 +96,7 @@ export const useStudentDetails = () => {
       });
       dispatch(setStudentMessage(""));
       dispatch(setSelectedStudent(null));
-      navigate(PrivateRoutes.TEACHER);
+      navigate(PrivateRoutes.STUDENT);
     }
   }, [studentMessage, toast, navigate, dispatch]);
 
