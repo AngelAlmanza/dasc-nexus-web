@@ -64,7 +64,7 @@ const StudentDetails = () => {
               />
               <FormField
                 control={form.control}
-                name="lastname"
+                name="last_name"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Apellido</FormLabel>

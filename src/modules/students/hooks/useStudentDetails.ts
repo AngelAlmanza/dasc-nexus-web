@@ -19,8 +19,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { z } from "zod";
 
 const formSchema = z.object({
-  name: z.string().min(6, "El nombre debe tener al menos 6 carácteres"),
-  lastname: z.string().min(6, "El apellido debe tener al menos 6 carácteres"),
+  name: z.string().min(3, "El nombre debe tener al menos 6 carácteres"),
+  last_name: z.string().min(3, "El apellido debe tener al menos 6 carácteres"),
   phone: z
     .string()
     .min(10, "El teléfono debe tener al menos 10 carácteres")
@@ -43,7 +43,7 @@ export const useStudentDetails = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      lastname: "",
+      last_name: "",
       phone: "",
       email: "",
     },
@@ -52,9 +52,9 @@ export const useStudentDetails = () => {
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     const studentDto: StudentDto = {
       name: data.name,
-      lastname: data.lastname,
+      last_name: data.last_name,
       phone: data.phone,
-      email: data.phone,
+      email: data.email,
     };
 
     if (formType === "update") {
@@ -66,7 +66,7 @@ export const useStudentDetails = () => {
 
   const onCancel = () => {
     dispatch(setSelectedStudent(null));
-    navigate(PrivateRoutes.TEACHER);
+    navigate(PrivateRoutes.STUDENT);
   };
 
   useEffect(() => {
@@ -81,7 +81,7 @@ export const useStudentDetails = () => {
     if (selectedStudent) {
       form.reset({
         name: selectedStudent.name,
-        lastname: selectedStudent.lastname,
+        last_name: selectedStudent.last_name,
         email: selectedStudent.email,
         phone: selectedStudent.phone,
       });

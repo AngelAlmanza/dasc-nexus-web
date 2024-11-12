@@ -3,7 +3,7 @@ import { IBaseModel } from "@/data/models";
 
 export interface IStudent extends IBaseModel {
   name: string;
-  lastname: string;
+  last_name: string;
   email: string;
   phone: string;
 }
@@ -13,10 +13,9 @@ export interface StudentResponseData {
   created_at: Date;
   updated_at: Date;
   name: string;
-  lastname: string;
+  last_name: string;
   email: string;
   phone: string;
-  address: string;
   deleted_at: null;
 }
 
