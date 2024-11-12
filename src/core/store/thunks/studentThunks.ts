@@ -69,9 +69,9 @@ const deleteStudent = createAsyncThunk(
 );
 
 export {
-  getStudents,
-  getStudentById,
   createStudent,
-  updateStudent,
   deleteStudent,
+  getStudentById,
+  getStudents,
+  updateStudent,
 };

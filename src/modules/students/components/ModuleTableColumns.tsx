@@ -50,6 +50,6 @@ export const ModuleTableColumns: ColumnDef<IStudent>[] = [
   {
     id: "actions",
     enableHiding: false,
-    cell: ({ row }) => <ActionsColumn row={row}/>, 
+    cell: ({ row }) => <ActionsColumn row={row} />,
   },
-]; 
+];

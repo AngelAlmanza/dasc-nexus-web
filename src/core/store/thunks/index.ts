@@ -6,6 +6,7 @@ export * from "./groupThunks";
 export * from "./majorThunks";
 export * from "./planThunks";
 export * from "./scheduleBlockThunks";
+export * from "./studentThunks";
 export * from "./subjectThunks";
 export * from "./teacherScheduleThunks";
 export * from "./teacherThunks";

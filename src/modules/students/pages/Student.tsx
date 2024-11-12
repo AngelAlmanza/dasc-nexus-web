@@ -7,9 +7,9 @@ import {
   DataTablePagination,
 } from "@/modules/shared/components";
 import { useDataTable, useModuleActions } from "@/modules/shared/hooks";
-import { BreadcrumbModule} from "@/modules/students/components";
-import { ModuleTableColumns } from "../components/ModuleTableColumns";
-import { useStudents } from "../hooks";
+import { BreadcrumbModule } from "@/modules/students/components";
+import { ModuleTableColumns } from "@/modules/students/components/ModuleTableColumns";
+import { useStudents } from "@/modules/students/hooks";
 import { getColumnLabel } from "@/modules/students/utils";
 import {
   getCoreRowModel,

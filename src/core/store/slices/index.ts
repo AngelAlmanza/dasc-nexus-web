@@ -6,6 +6,7 @@ export * from "./groupSlice";
 export * from "./majorSlice";
 export * from "./planSlice";
 export * from "./scheduleBlockSlice";
+export * from "./studentSlice";
 export * from "./subjectSlice";
 export * from "./teacherScheduleSlice";
 export * from "./teacherSlice";

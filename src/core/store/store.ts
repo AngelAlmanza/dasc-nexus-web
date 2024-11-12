@@ -7,13 +7,13 @@ import {
   MajorSlice,
   PlanSlice,
   ScheduleBlockSlice,
+  StudentSlice,
   SubjectSlice,
   TeacherScheduleSlice,
   TeacherSlice,
   TermSlice,
   UISlice,
 } from "@/core/store/slices";
-import { StudentSlice } from "./slices/studentSlice";
 import { configureStore } from "@reduxjs/toolkit";
 
 export const store = configureStore({
@@ -26,9 +26,9 @@ export const store = configureStore({
     major: MajorSlice.reducer,
     plan: PlanSlice.reducer,
     scheduleBlocks: ScheduleBlockSlice.reducer,
-    teacherSchedule: TeacherScheduleSlice.reducer,
-    subject: SubjectSlice.reducer,
     student: StudentSlice.reducer,
+    subject: SubjectSlice.reducer,
+    teacherSchedule: TeacherScheduleSlice.reducer,
     teacher: TeacherSlice.reducer,
     term: TermSlice.reducer,
     ui: UISlice.reducer,

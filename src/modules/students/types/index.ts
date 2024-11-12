@@ -1,1 +1,1 @@
-export * from './columnLabel';
+export * from "./columnLabel";

@@ -1,8 +1,11 @@
 import { PrivateRoutes } from "@/core/enums";
 import { useToast } from "@/core/hooks";
 import { useAppDispatch, useAppSelector } from "@/core/store/hooks";
-import { setSelectedStudent, setStudentMessage } from "@/core/store/slices/studentSlice";
-import { 
+import {
+  setSelectedStudent,
+  setStudentMessage,
+} from "@/core/store/slices/studentSlice";
+import {
   createStudent,
   getStudentById,
   updateStudent,
@@ -16,33 +19,33 @@ import { useNavigate, useParams } from "react-router-dom";
 import { z } from "zod";
 
 const formSchema = z.object({
-    name: z.string().min(6, "El nombre debe tener al menos 6 carácteres"),
-    lastname: z.string().min(6, "El apellido debe tener al menos 6 carácteres"),
-    phone: z
-      .string()
-      .min(10, "El teléfono debe tener al menos 10 carácteres")
-      .regex(/^\d+$/, "El teléfono solo debe contener números"),
-    email: z.string().email("El email no es válido"),
+  name: z.string().min(6, "El nombre debe tener al menos 6 carácteres"),
+  lastname: z.string().min(6, "El apellido debe tener al menos 6 carácteres"),
+  phone: z
+    .string()
+    .min(10, "El teléfono debe tener al menos 10 carácteres")
+    .regex(/^\d+$/, "El teléfono solo debe contener números"),
+  email: z.string().email("El email no es válido"),
 });
 
 export const useStudentDetails = () => {
-    const { id } = useParams();
-    const [title, setTitle] = useState<string>("Crear Alumno");
-    const [formType, setFormType] = useState<FormTypes>("create");
-    const { isLoading, selectedStudent, studentMessage } = useAppSelector(
+  const { id } = useParams();
+  const [title, setTitle] = useState<string>("Crear Alumno");
+  const [formType, setFormType] = useState<FormTypes>("create");
+  const { isLoading, selectedStudent, studentMessage } = useAppSelector(
     (state) => state.student,
-    );
-    const { toast } = useToast();
-    const navigate = useNavigate();
-    const dispatch = useAppDispatch();
+  );
+  const { toast } = useToast();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
-    const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-        name: "",
-        lastname: "",
-        phone: "",
-        email: "",
+      name: "",
+      lastname: "",
+      phone: "",
+      email: "",
     },
   });
 
@@ -50,9 +53,8 @@ export const useStudentDetails = () => {
     const studentDto: StudentDto = {
       name: data.name,
       lastname: data.lastname,
-      phone:data.phone,
-      email:data.phone,
-
+      phone: data.phone,
+      email: data.phone,
     };
 
     if (formType === "update") {

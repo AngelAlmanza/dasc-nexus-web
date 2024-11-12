@@ -31,13 +31,13 @@ export class StudentRepository implements IRepository<IStudent, StudentDto> {
     const response = await api.get<GetStudentResponse>(`${apiStudent}/${id}`);
     const student = response.data.data;
     return {
-        id: student.id,
-        name: student.name,
-        lastname: student.lastname,
-        email: student.email,
-        phone: student.phone,
-        createdAt: student.created_at,
-        updatedAt: student.updated_at,
+      id: student.id,
+      name: student.name,
+      lastname: student.lastname,
+      email: student.email,
+      phone: student.phone,
+      createdAt: student.created_at,
+      updatedAt: student.updated_at,
     };
   }
 
@@ -45,13 +45,13 @@ export class StudentRepository implements IRepository<IStudent, StudentDto> {
     const response = await api.post<CreateStudentResponse>(apiStudent, data);
     const student = response.data.data;
     return {
-        id: student.id,
-        name: student.name,
-        lastname: student.lastname,
-        email: student.email,
-        phone: student.phone,
-        createdAt: student.created_at,
-        updatedAt: student.updated_at,
+      id: student.id,
+      name: student.name,
+      lastname: student.lastname,
+      email: student.email,
+      phone: student.phone,
+      createdAt: student.created_at,
+      updatedAt: student.updated_at,
     };
   }
 
@@ -62,13 +62,13 @@ export class StudentRepository implements IRepository<IStudent, StudentDto> {
     );
     const student = response.data.data;
     return {
-        id: student.id,
-        name: student.name,
-        lastname: student.lastname,
-        email: student.email,
-        phone: student.phone,
-        createdAt: student.created_at,
-        updatedAt: student.updated_at,
+      id: student.id,
+      name: student.name,
+      lastname: student.lastname,
+      email: student.email,
+      phone: student.phone,
+      createdAt: student.created_at,
+      updatedAt: student.updated_at,
     };
   }
 
